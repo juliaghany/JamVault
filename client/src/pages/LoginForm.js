@@ -1,15 +1,17 @@
 // not yet finished 
 import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap'
 import '../index.css'
 
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
+import { LOGIN_USER } from '../utils/mutations'
 
 const LoginForm = () => {
     const [userFormData, setUserFormData] = useState({ email: '', password: '' });
     const [validated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const [login] = useMutation()
+    const [login] = useMutation(LOGIN_USER)
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -20,7 +22,7 @@ const LoginForm = () => {
         event.preventDefault();
 
         const form = event.currentTarget;
-        if (form.checkValidty() === false) {
+        if (form.checkValidity() === false) {
             event.preventDefaut();
             event.stopPropagation();
         }
@@ -45,34 +47,29 @@ const LoginForm = () => {
 
     return (
         <>
-            <form noValidate validated={validated} onSubmit={handleFormSubmit} className='max-w-md mx-auto'>
+            <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="max-w-md mx-auto">
                 {showAlert && (
-                    <div className='bg-red-500 text-white px-4 py-2 mb-4 rounded'>
+                    <div className="bg-red-500 text-white px-4 py-2 mb-4 rounded">
                         Something went wrong with your login credentials!
                     </div>
                 )}
-                <div className='mb-4'>
-                    <label className='block mb-1' htmlFor='email'>
-                        Email Address
-                    </label>
-                    <input
-                        type='email'
-                        name='email'
+
+                <Form.Group className="mb-4" controlId="email">
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="email"
                         value={userFormData.email}
                         onChange={handleInputChange}
                         required
-                        className='w-full px-4 py-2 border rounded'
+                        className="w-full px-4 py-2 border rounded"
                     />
-                    <div className='mb-4'>
-                        {/* Show error message here */}
-                    </div>
-                </div>
+                    <Form.Control.Feedback type="invalid">Email is required!</Form.Control.Feedback>
+                </Form.Group>
 
-                <div className='mb-4'>
-                    <label className='block mb-1' htmlFor='password'>
-                        Password
-                    </label>
-                    <input
+                <Form.Group className="mb-4" controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
                         type="password"
                         name="password"
                         value={userFormData.password}
@@ -80,15 +77,17 @@ const LoginForm = () => {
                         required
                         className="w-full px-4 py-2 border rounded"
                     />
-                    <div className='text-red-500 mt-1'>
-                        {/* Show error message if password is invalid */}
-                    </div>
-                </div>
+                    <Form.Control.Feedback type="invalid">Password is required!</Form.Control.Feedback>
+                </Form.Group>
 
-                <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded'>
+                <Button
+                    disabled={!(userFormData.email && userFormData.password)}
+                    type="submit"
+                    variant="success"
+                >
                     Login
-                </button>
-            </form>
+                </Button>
+            </Form>
         </>
     );
 }
