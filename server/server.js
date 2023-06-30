@@ -1,8 +1,11 @@
-const express = require('express')
-const fileUpload = require('express-fileupload')
-
-PORT = 3001
+const express = require('express');
+const fileUpload = require('express-fileupload');
+const express = require('express');
+const searchRouter = require('./routes/searchRouter');
 const app = express()
+PORT = 3001
+
+app.use('/api', searchRouter);
 
 app.use(fileUpload())
 
@@ -26,3 +29,5 @@ app.post('/upload', (req, res) => {
 })
 
 app.listen(PORT, () => console.log('Serve listening on http://localhost:3001'))
+require('dotenv').config();
+
