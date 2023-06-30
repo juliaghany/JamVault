@@ -1,5 +1,3 @@
-// typeDefs.js
-
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -42,6 +40,9 @@ const typeDefs = gql`
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): User
-        addPost(title: String!, content: String!, userId: ID!, concertId: ID!): Post
+        addPost(title: String!, content: String!, userId: ID!, concertId: ID!, photos: [String], videos: [String]): Post
         votePost(postId: ID!): Post
     }
+`;
+
+module.exports = typeDefs;
