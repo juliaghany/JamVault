@@ -2,6 +2,7 @@
   "name": "project-3",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
     "axios": "^1.4.0",
@@ -35,7 +36,6 @@
       "not dead",
       "not op_mini all"
     ],
-    "proxy": "http://localhost:3001",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
