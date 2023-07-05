@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import axios from 'axios'
+//import axios from 'axios'
 
 const MediaUpload = () => {
 
@@ -18,23 +18,20 @@ const MediaUpload = () => {
         formData.append('media', media)
 
         try {
+          const response = await fetch("/uploads", {
+            method:"POST",
+            body: formData
+          })
 
-            const res = await axios.post('/uploads', formData, {
-                headers: {
-                    'Content-Type':'multipart/form-data'
-                }
-            });
+          if(response.ok) {
+            console.log("successful")
+          } else {
+            console.error("unsuccessful")
+          }
 
-            const {  fileName, filePath } = res.data
 
-            setUploadedMedia({  fileName, filePath} )
-
-        } catch(err) {
-            if(err.response.status === 500) {
-                console.log('Problem with the server')
-            } else {
-                console.log(err.response.data)
-            }
+        } catch(error) {
+          console.log(error)
         }
 
     }
