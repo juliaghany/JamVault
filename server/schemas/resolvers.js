@@ -26,7 +26,16 @@ const resolvers = {
             await post.save();
             return post;
             },
+        addConcert: async (parent, { title, date, location, artist, venue, city, country, image }) => {
+            return Concert.create({ title, date, location, artist, venue, city, country, image });
         },
+        addConcertToUser: async (parent, { userId, concertId }) => {
+            const user = await User.findById(userId);
+            user.concerts.push(concertId);
+            await user.save();
+            return user;
+        },
+    },
 
     User: {
         concerts: async (user) => {

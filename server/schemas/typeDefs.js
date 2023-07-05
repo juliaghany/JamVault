@@ -18,8 +18,9 @@ const typeDefs = gql`
         venue: String!
         city: String!
         country: String!
+        image: String!
         posts: [Post]
-    }
+    }    
 
     type Post {
         _id: ID!
@@ -42,6 +43,8 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): User
         addPost(title: String!, content: String!, userId: ID!, concertId: ID!, photos: [String], videos: [String]): Post
         votePost(postId: ID!): Post
+        addConcert(title: String!, date: String!, location: String!, artist: String!, venue: String!, city: String!, country: String!, image: String!): Concert
+        addConcertToUser(userId: ID!, concertId: ID!): User
     }
 `;
 
