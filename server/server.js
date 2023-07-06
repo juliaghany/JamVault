@@ -1,7 +1,7 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const path = require("path");
-const searchRouter = require('./routes/searchRouter');
+const searchRouter = require('./routes/searchRoute');
 const app = express()
 PORT = 3001
 
