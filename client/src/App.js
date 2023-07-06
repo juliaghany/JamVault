@@ -1,21 +1,59 @@
-import React from "react";
-import MediaUpload from "./components/MediaUpload";
+import React, { useState } from "react";
+import {
+    ApolloClient,
+    InMemoryCache,
+    ApolloProvider,
+    createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import Container from './components/Container';
 
+const httpLink = createHttpLink({
+    uri: '/graphql',
+});
 
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('id_token');
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    };
+});
 
-const App = () => (
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+});
 
-    <div className='container mt-4'>
+const App = () => {
 
-    <h4 className='display-4 text-center mb-4 '>
-    <i className='fab fa-react'/>
-    React File Upload
-    </h4>
+    const [currentPage, setCurrentPage] = useState('Home');
 
-    <MediaUpload />
+    const handlePageChange = (page) => setCurrentPage(page)
 
-
-</div>
-) 
+    return (
+        <ApolloProvider client={client}>
+            <div>
+                <Container currentPage={currentPage} handlePageChange={handlePageChange} />
+            </div>
+        </ApolloProvider>
+    )
+}
 
 export default App
+
+// import MediaUpload from "./components/MediaUpload";
+
+//     < div className = 'container mt-4' >
+
+//     <h4 className='display-4 text-center mb-4 '>
+//     <i className='fab fa-react'/>
+//     React File Upload
+//     </h4>
+
+//     <MediaUpload />
+
+
+// </div >
