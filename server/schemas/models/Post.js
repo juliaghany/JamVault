@@ -9,8 +9,7 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  photos: [String], // if photos are stored at a URL, this will link to them
-  videos: [String], // if videos are stored at a URL, this will link to them
+  media: [String], // if photos videos are stored at a URL, this will link to them
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -24,6 +23,10 @@ const PostSchema = new mongoose.Schema({
   votes: {
     type: Number,
     default: 0
+  },
+  createdAt: {
+    type: Date,
+    defaultValue: Date.now()
   }
 });
 
