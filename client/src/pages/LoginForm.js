@@ -1,21 +1,20 @@
-// not yet finished 
-import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap'
-import '../index.css'
+// // not yet finished 
 
+import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { LOGIN_USER } from '../utils/mutations'
+import { LOGIN_USER } from '../utils/mutations';
 
-const LoginForm = () => {
+const LoginForm = ({ handlePageChange }) => {
     const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-    const [validated] = useState(false);
+    const [validated, setValidated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const [login] = useMutation(LOGIN_USER)
+    const [login] = useMutation(LOGIN_USER);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value })
+        setUserFormData({ ...userFormData, [name]: value });
     };
 
     const handleFormSubmit = async (event) => {
@@ -23,7 +22,7 @@ const LoginForm = () => {
 
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
-            event.preventDefaut();
+            event.preventDefault();
             event.stopPropagation();
         }
 
@@ -43,18 +42,17 @@ const LoginForm = () => {
             email: '',
             password: '',
         });
+        setValidated(true);
     };
 
     return (
-        <>
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="max-w-md mx-auto">
-                {showAlert && (
-                    <div className="bg-red-500 text-white px-4 py-2 mb-4 rounded">
-                        Something went wrong with your login credentials!
-                    </div>
-                )}
+        <div className="d-flex justify-content-center align-items-center vh-100">
+            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+                {showAlert && <Alert variant="danger">Something went wrong with your login credentials!</Alert>}
 
-                <Form.Group className="mb-4" controlId="email">
+                <h2 className="text-center mb-4">Login</h2>
+
+                <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         type="email"
@@ -62,12 +60,11 @@ const LoginForm = () => {
                         value={userFormData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 border rounded"
                     />
                     <Form.Control.Feedback type="invalid">Email is required!</Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group className="mb-4" controlId="password">
+                <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
@@ -75,21 +72,31 @@ const LoginForm = () => {
                         value={userFormData.password}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-2 border rounded"
                     />
                     <Form.Control.Feedback type="invalid">Password is required!</Form.Control.Feedback>
                 </Form.Group>
 
-                <Button
-                    disabled={!(userFormData.email && userFormData.password)}
-                    type="submit"
-                    variant="success"
-                >
-                    Login
-                </Button>
+                <div className="text-center">
+                    <Button
+                        disabled={!(userFormData.email && userFormData.password)}
+                        type="submit"
+                        variant="primary"
+                    >
+                        Login
+                    </Button>
+                    <p className='mt-3'>
+                        Don't have an account?
+                        <button
+                            className='btn btn-link'
+                            onClick={() => handlePageChange('Signup')}
+                        >
+                            Create Account
+                        </button>
+                    </p>
+                </div>
             </Form>
-        </>
+        </div>
     );
-}
+};
 
 export default LoginForm;
