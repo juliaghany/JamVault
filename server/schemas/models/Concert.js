@@ -7,6 +7,7 @@ const ConcertSchema = new mongoose.Schema({
     },
     description: {
       type: String,
+      required: true
     },
     date: {
       type: Date,
@@ -36,7 +37,7 @@ const ConcertSchema = new mongoose.Schema({
       type: String, 
       required: true
     },
-    posts: [{
+    posts: [{ //we might not need this D
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Post',
     }]
