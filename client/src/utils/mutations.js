@@ -16,39 +16,14 @@ export const LOGIN_USER = gql`
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
+        user { 
         _id
         username
         email
-        concerts {
-            _id
-            title
-            date
-            location
-            artist
-            venue
-            city
-            country
-        }
-        posts {
-            _id
-            title
-            content 
-            photos
-            videos
-            votes
-            concert {
-                _id
-                title
-                date
-                location
-                artist
-                venue
-                city
-                country
-            }
-        }
     }
- }
+  }
+}
+
 `;
 
 export const ADD_POST = gql`
