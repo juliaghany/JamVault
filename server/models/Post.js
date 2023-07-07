@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  media: [String], // if photos videos are stored at a URL, this will link to them
+  media: [String],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

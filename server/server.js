@@ -54,6 +54,8 @@ app.get("/", (req,res)=>{
 const startApolloServer = async () => {
     await server.start();
     server.applyMiddleware({ app });
+
+    console.log(`Server GraphQL Path is: ${server.graphqlPath}`);
     
     db.once('open', () => {
       app.listen(PORT, () => {

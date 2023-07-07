@@ -27,11 +27,10 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_POST = gql`
-  mutation addPost($title: String!, $content: String!, $userId: ID!, $concertId: ID!, $photos: [String], $videos:[String]) {
-    addPost(title: $title, content: $content, userId: $userId, concertId: $concertId, photos: $photos, videos: $videos) {
+  mutation addPost($concertId: ID!, $review: String!, $photos: [String], $videos:[String]) {
+    addPost(concertId: $concertId, review: $review, photos: $photos, videos: $videos) {
         _id
-        title
-        content
+        review
         photos
         videos
         user {
@@ -61,6 +60,38 @@ export const VOTE_POST = gql`
         title
         content
         votes
+    }
+  }
+`;
+
+export const ADD_CONCERT = gql`
+  mutation addConcert($title: String!, $date: String!, $location: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String) {
+    addConcert(title: $title, date: $date, location: $location, artist: $artist, venue: $venue, city: $city, country: $country, image: $image) {
+        _id
+        title
+        date
+        location
+        artist
+        venue
+        city
+        country
+        image
+    }
+  }
+`;
+
+export const CONCERT_BY_DESCRIPTION = gql`
+  query concertByDescription($description: String!) {
+    concertByDescription(description: $description) {
+      _id
+      title
+      date
+      location
+      artist
+      venue
+      city
+      country
+      image
     }
   }
 `;
