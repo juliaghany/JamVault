@@ -1,10 +1,22 @@
 // // not yet finished 
-
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutations';
+
+
+const styles = {
+    background: {
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        padding: '20px',
+        borderRadius: '4px',
+    },
+    text: {
+        color: 'white',
+    },
+}
+
 
 const LoginForm = ({ handlePageChange }) => {
     const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -46,8 +58,8 @@ const LoginForm = ({ handlePageChange }) => {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <div className="d-flex justify-content-center align-items-center vh-100" style={{ marginTop: '50px' }}>
+            <Form noValidate validated={validated} onSubmit={handleFormSubmit} style={styles.background}>
                 {showAlert && <Alert variant="danger">Something went wrong with your login credentials!</Alert>}
 
                 <h2 className="text-center mb-4">Login</h2>
@@ -80,7 +92,8 @@ const LoginForm = ({ handlePageChange }) => {
                     <Button
                         disabled={!(userFormData.email && userFormData.password)}
                         type="submit"
-                        variant="primary"
+                        variant="dark"
+                        style={{ marginTop: '10px'}}
                     >
                         Login
                     </Button>
