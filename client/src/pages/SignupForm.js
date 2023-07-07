@@ -25,7 +25,7 @@ const Signup = () => {
         })
     };
 
-    const handleSubmit = async (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault()
         console.log(formState)
 
@@ -51,7 +51,7 @@ const Signup = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
                   placeholder="Your username"

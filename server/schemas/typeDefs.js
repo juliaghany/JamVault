@@ -26,8 +26,7 @@ const typeDefs = gql`
         _id: ID!
         title: String!
         content: String!
-        photos: [String]
-        videos: [String]
+        media: [String]
         user: User!
         concert: Concert!
         votes: Int!
@@ -43,7 +42,7 @@ const typeDefs = gql`
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): User
-        addPost(title: String!, content: String!, userId: ID!, concertId: ID!, photos: [String], videos: [String]): Post
+        addPost(title: String!, content: String!, userId: ID!, concertDesciption: String!, photos: [String], videos: [String]): Post
         votePost(postId: ID!): Post
         addConcert(title: String!, date: String!, location: String!, artist: String!, venue: String!, city: String!, country: String!, image: String!): Concert
         addConcertToUser(userId: ID!, concertId: ID!): User
