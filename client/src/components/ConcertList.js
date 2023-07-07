@@ -3,9 +3,15 @@ import PostForm from './PostForm';
 
 const ConcertList = ({ results }) => {
   const [selectedConcert, setSelectedConcert] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelectConcert = (concert) => {
     setSelectedConcert(concert);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -18,7 +24,7 @@ const ConcertList = ({ results }) => {
           <p>Venue: {concert.venue}</p>
         </div>
       ))}
-      {selectedConcert && <PostForm concert={selectedConcert} />}
+      {selectedConcert && <PostForm concert={selectedConcert} onClose={handleCloseModal} isModalOpen={isModalOpen} />}
     </div>
   );
 };
