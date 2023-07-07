@@ -18,16 +18,18 @@ const resolvers = {
     },
   },
 
-  Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      return User.create({ username, email, password });
-    },
-    addPost: async (parent, { review, concertDescription, photos, videos }, context) => {
-      const authHeader = context.req.headers.authorization;
-  
-      if (!authHeader) {
-        throw new AuthenticationError('Authorization header must be provided');
-      }
+    Mutation: {
+        addUser: async (parent, { username, email, password }) => {
+            console.log("Hello" + username + email + password)
+            return User.create({ username, email, password });
+        },
+        addPost: async (parent, { title, content, concertId, photos, videos }, context) => {
+
+            const authHeader = context.req.headers.authorization;
+        
+            if (!authHeader) {
+                throw new AuthenticationError('Authorization header must be provided');
+            }
 
       const token = authHeader.split(' ')[1];
       let user;

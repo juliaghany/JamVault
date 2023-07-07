@@ -27,8 +27,7 @@ const typeDefs = gql`
         _id: ID!
         title: String!
         content: String!
-        photos: [String]
-        videos: [String]
+        media: [String]
         user: User!
         concert: Concert!
         votes: Int!
@@ -37,7 +36,7 @@ const typeDefs = gql`
     type Query {
         users: [User]
         concerts: [Concert]
-        Posts: [Post]
+        posts: [Post]
         userPosts(userId: ID!): Post
         concertPosts(concertDescription: description!): Post
         concertByDescription(description: String!): Concert

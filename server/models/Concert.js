@@ -38,7 +38,7 @@ const ConcertSchema = new mongoose.Schema({
       type: String, 
       required: true
     },
-    posts: [{
+    posts: [{ //we might not need this D
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Post',
     }]

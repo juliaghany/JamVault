@@ -1,13 +1,29 @@
 const express = require('express');
+const { ApolloServer } = require('apollo-server-express')
 const fileUpload = require('express-fileupload');
 const path = require("path");
 const searchRouter = require('./routes/searchRoute');
+const { authMiddleware } = require('./utils/auth')
+
+const { typeDefs, resolvers } = require('./schemas')
+const db = require('./config/connection')
+
 const app = express()
-PORT = 3001
+const PORT = process.env.PORT || 3001;
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: authMiddleware,
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "../client/build")));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  }
 
 app.use('/api', searchRouter, fileUpload());
 
@@ -35,6 +51,16 @@ app.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname, "../client/build/index.html"))
 })
 
-app.listen(PORT, () => console.log('Server listening on http://localhost:3001'))
-require('dotenv').config();
+const startApolloServer = async () => {
+    await server.start();
+    server.applyMiddleware({ app });
+    
+    db.once('open', () => {
+      app.listen(PORT, () => {
+        console.log(`API server running on port ${PORT}!`);
+        console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+      })
+    })
+    };
 
+    startApolloServer();

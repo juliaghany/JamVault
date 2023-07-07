@@ -44,8 +44,6 @@ const SearchForm = ({ setResults }) => {
       <input type="date" value={minDate} onChange={(e) => setMinDate(e.target.value)} placeholder="Min Date"/>
       <input type="date" value={maxDate} onChange={(e) => setMaxDate(e.target.value)} placeholder="Max Date"/>
       <button type="submit">Search</button>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
     </form>
   );
 };
