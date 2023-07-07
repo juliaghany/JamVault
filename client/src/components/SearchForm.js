@@ -4,14 +4,23 @@ const SearchForm = ({ setResults }) => {
   const [artist, setArtist] = useState("");
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
-    fetch(`/api/search?artist=${artist}&minDate=${minDate}&maxDate=${maxDate}`)
-      .then((response) => response.json())
+    fetch(`/api/search?artist=${encodeURIComponent(artist)}&minDate=${encodeURIComponent(minDate)}&maxDate=${encodeURIComponent(maxDate)}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         const concerts = data.data.map(concert => ({
+          description: concert.description,  
           artist: concert.name,
           date: concert.startDate,
           city: concert.location.address.addressLocality,
@@ -19,11 +28,13 @@ const SearchForm = ({ setResults }) => {
           venue: concert.location.name,
           image: concert.image
         }));
-
         setResults(concerts);
       })
       .catch((error) => {
-        // add error handler
+        setError("An error occurred while fetching data.");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -33,6 +44,8 @@ const SearchForm = ({ setResults }) => {
       <input type="date" value={minDate} onChange={(e) => setMinDate(e.target.value)} placeholder="Min Date"/>
       <input type="date" value={maxDate} onChange={(e) => setMaxDate(e.target.value)} placeholder="Max Date"/>
       <button type="submit">Search</button>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
     </form>
   );
 };

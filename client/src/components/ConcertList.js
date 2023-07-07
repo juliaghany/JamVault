@@ -19,6 +19,7 @@ const ConcertList = ({ results }) => {
       {results.map((concert, index) => (
         <div key={index} onClick={() => handleSelectConcert(concert)}>
           <h2>{concert.artist}</h2>
+          <img src={concert.image} alt={concert.title} />
           <p>{concert.date}</p>
           <p>{concert.city}, {concert.country}</p>
           <p>Venue: {concert.venue}</p>

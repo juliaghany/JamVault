@@ -34,7 +34,7 @@ const Signup = () => {
                 variables: {...formState },
             })
 
-            Auth.login(dara.addUser.token);
+            Auth.login(data.addUser.token);
         } catch(err) {
             console.log(err)
         }

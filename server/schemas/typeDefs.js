@@ -20,6 +20,7 @@ const typeDefs = gql`
         country: String!
         image: String!
         posts: [Post]
+        description: String!
     }    
 
     type Post {
@@ -39,13 +40,14 @@ const typeDefs = gql`
         Posts: [Post]
         userPosts(userId: ID!): Post
         concertPosts(concertDescription: description!): Post
+        concertByDescription(description: String!): Concert
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): User
-        addPost(title: String!, content: String!, userId: ID!, concertId: ID!, photos: [String], videos: [String]): Post
+        addPost(title: String!, content: String!, userId: ID!, concertDescription: String!, photos: [String], videos: [String]): Post
         votePost(postId: ID!): Post
-        addConcert(title: String!, date: String!, location: String!, artist: String!, venue: String!, city: String!, country: String!, image: String!): Concert
+        addConcert(title: String!, description: String!, date: String!, location: String!, artist: String!, venue: String!, city: String!, country: String!, image: String!): Concert
         addConcertToUser(userId: ID!, concertId: ID!): User
     }
 `;
