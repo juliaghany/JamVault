@@ -15,7 +15,9 @@ router.get('/search', async (req, res) => {
     });
 
     res.json(response.data);
+    console.log(response.data);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'An error occurred.' });
   }
 });

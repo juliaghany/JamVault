@@ -7,6 +7,7 @@ const ConcertSchema = new mongoose.Schema({
     },
     description: {
       type: String,
+      unique: true,
       required: true
     },
     date: {
