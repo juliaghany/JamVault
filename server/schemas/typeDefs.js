@@ -20,6 +20,7 @@ const typeDefs = gql`
         country: String!
         image: String!
         posts: [Post]
+        description: String!
     }    
 
     type Post {
@@ -35,9 +36,8 @@ const typeDefs = gql`
     type Query {
         users: [User]
         concerts: [Concert]
-        Posts: [Post]
+        posts: [Post]
         userPosts(userId: ID!): Post
-        concertPosts(concertDescription: description!): Post
     }
 
     type Mutation {

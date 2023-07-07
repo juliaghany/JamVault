@@ -136,7 +136,7 @@ const Signup = ({ handlePageChange }) => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
+console.log("hello")
       Auth.login(data.addUser.token);
     } catch (err) {
       console.log(err);
