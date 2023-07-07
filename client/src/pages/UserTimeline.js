@@ -1,15 +1,15 @@
 // UserTimeline.js
 
-import React from 'react';
+import React, {useState} from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_USER_POSTS } from "../utils/queries";
 
-const UserTimeline = () => {
-    return (
-        <div>
-            <h2>User Timeline</h2>
-            <p>Content for the user timeline goes here.</p>
-        </div>
-    );
-};
+const userPosts = () => {
 
-export default UserTimeline;
+    const [userState, setUserState] = useState({
+        media: ''
+    })
+    const { userId } = useParams()
 
+    const { loading, data } = useQuery(QUERY_USER_POSTS,)
+}
