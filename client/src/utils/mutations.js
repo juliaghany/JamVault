@@ -13,17 +13,14 @@ export const LOGIN_USER = gql`
     }
   `;
 
-export const ADD_USER = gql`
+  export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
-        user { 
-        _id
-        username
-        email
+      _id
+      username
+      email
     }
   }
-}
-
 `;
 
 export const ADD_POST = gql`
@@ -65,10 +62,11 @@ export const VOTE_POST = gql`
 `;
 
 export const ADD_CONCERT = gql`
-  mutation addConcert($title: String!, $date: String!, $location: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String) {
-    addConcert(title: $title, date: $date, location: $location, artist: $artist, venue: $venue, city: $city, country: $country, image: $image) {
+  mutation addConcert($title: String!, $description: String!, $date: String!, $location: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String) {
+    addConcert(title: $title, description: $description, date: $date, location: $location, artist: $artist, venue: $venue, city: $city, country: $country, image: $image) {
         _id
         title
+        description
         date
         location
         artist

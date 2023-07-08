@@ -19,10 +19,15 @@ const resolvers = {
   },
 
     Mutation: {
-        addUser: async (parent, { username, email, password }) => {
-            console.log("Hello" + username + email + password)
-            return User.create({ username, email, password });
-        },
+      addUser: async (parent, { username, email, password }) => {
+        try {
+          const user = await User.create({ username, email, password });
+          return user;
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+      },
         addPost: async (parent, { title, content, concertId, photos, videos }, context) => {
 
             const authHeader = context.req.headers.authorization;
@@ -62,8 +67,8 @@ const resolvers = {
       await post.save();
       return post;
     },
-    addConcert: async (parent, { title, date, location, artist, venue, city, country, image }) => {
-      return Concert.create({ title, date, location, artist, venue, city, country, image });
+    addConcert: async (parent, { title, date, description, location, artist, venue, city, country, image }) => {
+      return Concert.create({ title, date, description, location, artist, venue, city, country, image });
     },
     addConcertToUser: async (parent, { userId, concertId }) => {
       const user = await User.findById(userId);

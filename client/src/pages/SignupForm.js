@@ -32,6 +32,7 @@ const Signup = ({ handlePageChange }) => {
   };
 
   const handleSubmit = async (event) => {
+    console.log(event);
     event.preventDefault();
     console.log(formState);
 
@@ -41,8 +42,8 @@ const Signup = ({ handlePageChange }) => {
       });
 console.log("hello")
       Auth.login(data.addUser.token);
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
