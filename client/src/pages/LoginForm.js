@@ -22,7 +22,7 @@ const LoginForm = ({ handlePageChange }) => {
     const [userFormData, setUserFormData] = useState({ email: '', password: '' });
     const [validated, setValidated] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-    const [login] = useMutation(LOGIN_USER);
+    const [login, { error, data }] = useMutation(LOGIN_USER);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -31,30 +31,42 @@ const LoginForm = ({ handlePageChange }) => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        console.log(userFormData)
+        console.log(event)
 
         try {
             const { data } = await login({
-                variables: { ...userFormData },
+                variables: {...userFormData}          
             });
 
-            Auth.login(data.login.token);
-        } catch (err) {
-            console.log(err);
-            setShowAlert(true);
+            Auth.login(data.login.token)
+        } catch(e) { 
+            console.error(e)
         }
 
-        setUserFormData({
-            username: '',
-            email: '',
-            password: '',
-        });
-        setValidated(true);
+        // const form = event.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        // }
+
+        // try {
+        //     const { data } = await login({
+        //         variables: { ...userFormData },
+        //     });
+
+        //     Auth.login(data.login.token);
+        // } catch (err) {
+        //     console.log(err);
+        //     setShowAlert(true);
+        // }
+
+        // setUserFormData({
+        //     username: '',
+        //     email: '',
+        //     password: '',
+        // });
+        // setValidated(true);
     };
 
     return (
