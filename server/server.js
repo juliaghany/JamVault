@@ -25,8 +25,8 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
 
-app.use('/api', searchRouter, fileUpload());
-
+app.use(fileUpload());
+app.use('/api', searchRouter);
 
 //upload endpoint
 
