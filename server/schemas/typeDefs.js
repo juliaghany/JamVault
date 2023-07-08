@@ -8,6 +8,10 @@ const typeDefs = gql`
         concerts: [Concert]
         posts: [Post]
     }
+    type Auth {
+        token: ID!
+        user: User
+      }
 
     type Concert {
         _id: ID!
@@ -48,6 +52,7 @@ const typeDefs = gql`
         votePost(postId: ID!): Post
         addConcert(title: String!, description: String!, date: String!, location: String!, artist: String!, venue: String!, city: String!, country: String!, image: String!): Concert
         addConcertToUser(userId: ID!, concertId: ID!): User
+        login(email: String!, password: String!): Auth
     }
 `;
 

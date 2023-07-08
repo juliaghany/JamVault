@@ -1,6 +1,7 @@
 const { User, Concert, Post } = require('../models');
 const { AuthenticationError } = require('apollo-server-errors');
 const jwt = require('jsonwebtoken');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -75,6 +76,22 @@ const resolvers = {
       user.concerts.push(concertId);
       await user.save();
       return user;
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError('No profile with this email found!');
+      }
+
+      // const correctPw = await User.isCorrectPassword(password);
+
+      // if (!correctPw) {
+      //   throw new AuthenticationError('Incorrect password!');
+      // }
+
+      const token = signToken(user);
+      return { token, user };
     },
   },
 
