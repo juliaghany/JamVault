@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
-const MediaUpload = ({ onMediaSelected }) => {
+const MediaUpload = () => {
 
     const [media, setMedia] = useState('')
     const [mediaName, setMediaName] = useState('Choose File')
+    const [uploadedMedia, setUploadedMedia] = useState({})
 
     const handleMedia = (e) => {
-        const file = e.target.files[0];
-        setMedia(file);
-        setMediaName(file.name);
-        onMediaSelected(file);
+        setMedia(e.target.files[0])
+        setMediaName(e.target.files[0].name)
     }
 
     const handleSubmit = async (e) => {
@@ -18,35 +17,56 @@ const MediaUpload = ({ onMediaSelected }) => {
         formData.append('media', media)
 
         try {
-            const response = await fetch("/uploads", {
-                method:"POST",
-                body: formData
-            })
+          const response = await fetch("/uploads", {
+            method:"POST",
+            body: formData
+          })
 
-            if(response.ok) {
-                console.log("successful")
-            } else {
-                console.error("unsuccessful")
-            }
+          if(response.ok) {
+            console.log("successful")
+          } else {
+            console.error("unsuccessful")
+          }
+
 
         } catch(error) {
-            console.log(error)
+          console.log(error)
         }
+
     }
 
-    return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div className="custom-file mb-4">
-                    <input type="file" className="custom-file-input" id="customFile" onChange={handleMedia} />
-                    <label className="custom-file-label" htmlFor="customFile">
-                        {mediaName} 
-                    </label>
-                </div>
-                <button type='submit' className='btn btn-primary btn-block mt-4'> Upload</button>
-            </form>
-        </>
-    );
+  return (
+    <Fragment>
+      <form onSubmit={handleSubmit}>
+        <div className="custom-file mb-4">
+          <input type="file" className="custom-file-input" id="customFile" onChange={handleMedia} />
+          <label className="custom-file-label" htmlFor="customFile">
+            {mediaName} 
+          </label>
+        </div>
+
+        <button type='submit' className='btn btn-primary btn-block mt-4'> Upload</button>
+      </form>
+    </Fragment>
+  );
 };
 
 export default MediaUpload;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

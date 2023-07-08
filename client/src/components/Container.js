@@ -6,6 +6,7 @@ import Login from '../pages/LoginForm.js';
 import Signup from '../pages/SignupForm.js';
 import Header from '../components/Header.js'
 
+
 export default function Container() {
     const [currentPage, setCurrentPage] = useState('Home');
 
@@ -22,6 +23,7 @@ export default function Container() {
         if (currentPage === 'Signup') {
             return <Signup handlePageChange={handlePageChange} />
         }
+
         return <Login handlePageChange={handlePageChange} />
     };
 
