@@ -109,21 +109,3 @@ export default NavBar;
 //                 </a>
 //             </li>
 //         </ul>
-
-
-{/* <div>
-{Auth.loggedIn() ? (
-  <button className="btn btn-lg btn-light m-2" onClick={logout}>
-    Logout
-  </button>
-) : (
-  <>
-    <Link className="btn btn-lg btn-primary m-2" to="/login">
-      Login
-    </Link>
-    <Link className="btn btn-lg btn-light m-2" to="/signup">
-      Signup
-    </Link>
-  </>
-)}
-</div> */}
