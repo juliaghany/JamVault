@@ -8,7 +8,6 @@ const ConcertList = ({ results }) => {
 
   const handleSelectConcert = (concert) => {
     setSelectedConcert(concert);
-    console.log("hi I'm a concert")
     setIsModalOpen(true);
   };
 

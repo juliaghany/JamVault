@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { Modal, Form, Button } from 'react-bootstrap';
-import { CONCERT_BY_DESCRIPTION, ADD_CONCERT, ADD_POST } from '../utils/mutations';
+import { ADD_CONCERT, ADD_POST } from '../utils/mutations';
+import { CONCERT_BY_DESCRIPTION } from '../utils/queries';
 import MediaUpload from './MediaUpload';
 import '../styles/PostForm.css'
 import { Row, Col } from 'react-bootstrap';
-
 
 const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [review, setReview] = useState('');
@@ -13,18 +13,29 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
 
-    const { data: concertData } = useQuery(CONCERT_BY_DESCRIPTION, {
+    const { data: concertData, error: queryError, loading: queryLoading } = useQuery(CONCERT_BY_DESCRIPTION, {
         variables: { description: concert.description },
         skip: !concert.description,
-      });
-      const [addConcert] = useMutation(ADD_CONCERT);
-      const [addPost] = useMutation(ADD_POST);
+    });
+
+    const [addConcert] = useMutation(ADD_CONCERT);
+    const [addPost] = useMutation(ADD_POST);
 
     useEffect(() => {
-        if (!concertData?.concertByDescription) {
-            addConcert({ variables: { concert } });
+        if (queryLoading) {
+          console.log('Query is loading');
+        } else if (queryError) {
+          console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
+        } else {
+          console.log('Query completed', concertData);
+          if (!concertData?.concertByDescription) {
+            console.log('Concert not found in database, adding it now', concert);
+            addConcert({ variables: concert })
+              .then(() => console.log('Concert successfully added to database'))
+              .catch((err) => console.error('Error adding concert to database:', err));
+          }
         }
-    }, [concertData, addConcert, concert]);
+      }, [concertData, queryLoading, queryError, addConcert, concert]);      
 
     const handleMedia = (mediaFile) => {
         setMediaFiles(oldMediaFiles => [...oldMediaFiles, mediaFile]);
@@ -32,51 +43,49 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+      
         if (!review || !mediaFiles.length) {
-            setError('Please enter all required fields.');
-            return;
+          setError('Please enter all required fields.');
+          return;
         }
-
-        let concertId = concertData?.concertByDescription?._id;
-        if (!concertId) {
-            const { data: newConcertData } = await addConcert({
-                variables: { concert },
-            });
-            concertId = newConcertData?.addConcert?._id;
-        }
-
+      
         try {
-            setIsSubmitting(true);
+          setIsSubmitting(true);
+      
+          let { data: newConcertData } = await addConcert({ variables: concert });
+          let concertId = newConcertData?.addConcert?._id;
 
-            const uploadedUrls = await Promise.all(
-                mediaFiles.map(async mediaFile => {
-                    const formData = new FormData();
-                    formData.append('media', mediaFile);
-
-                    const response = await fetch("/uploads", {
-                        method:"POST",
-                        body: formData
-                    });
-
-                    if (!response.ok) throw new Error('Upload failed');
-
-                    const data = await response.json();
-                    return data.url;
-                })
-            );
-
-            await addPost({ variables: { post: { concertId, review, media: uploadedUrls } } });
-
-            onClose();
-            setError('');
+          console.log('New concert:', newConcertData?.addConcert);
+          console.log('New concert ID:', concertId);
+      
+          const uploadedUrls = await Promise.all(
+            mediaFiles.map(async mediaFile => {
+              const formData = new FormData();
+              formData.append('media', mediaFile);
+      
+              const response = await fetch("/uploads", {
+                method:"POST",
+                body: formData
+              });
+      
+              if (!response.ok) throw new Error('Upload failed');
+      
+              const data = await response.json();
+              return data.url;
+            })
+          );
+      
+          await addPost({ variables: { post: { concertId, review, media: uploadedUrls } } });
+      
+          onClose();
+          setError('');
         } catch (error) {
-            console.log(error);
-            setError('An error occurred. Please try again.');
+          console.log(error);
+          setError('An error occurred. Please try again.');
         } finally {
-            setIsSubmitting(false);
+          setIsSubmitting(false);
         }
-    };
+      };      
 
     return (
         <Modal show={isModalOpen} onHide={onClose}>

@@ -30,4 +30,19 @@ query getConcertPosts ($concertDescription: description!) {
             username
         }
     }
-}`
+}`;
+
+export const CONCERT_BY_DESCRIPTION = gql`
+  query concertByDescription($description: String!) {
+    concertByDescription(description: $description) {
+      _id
+      description
+      date
+      artist
+      venue
+      city
+      country
+      image
+    }
+  }
+`;

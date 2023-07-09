@@ -36,9 +36,8 @@ export const ADD_POST = gql`
         }
         concert {
             _id
-            title
+            description
             date
-            location
             artist
             venue
             city
@@ -61,34 +60,16 @@ export const VOTE_POST = gql`
 `;
 
 export const ADD_CONCERT = gql`
-  mutation addConcert($title: String!, $description: String!, $date: String!, $location: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String) {
-    addConcert(title: $title, description: $description, date: $date, location: $location, artist: $artist, venue: $venue, city: $city, country: $country, image: $image) {
+  mutation addConcert($description: String!, $date: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String) {
+    addConcert(description: $description, date: $date, artist: $artist, venue: $venue, city: $city, country: $country, image: $image) {
         _id
-        title
         description
         date
-        location
         artist
         venue
         city
         country
         image
-    }
-  }
-`;
-
-export const CONCERT_BY_DESCRIPTION = gql`
-  query concertByDescription($description: String!) {
-    concertByDescription(description: $description) {
-      _id
-      title
-      date
-      location
-      artist
-      venue
-      city
-      country
-      image
     }
   }
 `;
