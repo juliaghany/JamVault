@@ -4,8 +4,8 @@ const SearchForm = ({ setResults }) => {
   const [artist, setArtist] = useState("");
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
-  const [setIsLoading] = useState(false);
-  const [setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -64,17 +64,17 @@ const SearchForm = ({ setResults }) => {
       </div>
     </div>
 
-  );
-};
-
-export default SearchForm;
-
 //     <form onSubmit={handleSubmit}>
 //       <input type="text" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist"/>
 //       <input type="date" value={minDate} onChange={(e) => setMinDate(e.target.value)} placeholder="Min Date"/>
 //       <input type="date" value={maxDate} onChange={(e) => setMaxDate(e.target.value)} placeholder="Max Date"/>
 //       <button type="submit">Search</button>
 //     </form>
+
+  );
+};
+
+export default SearchForm;
 
     // <form onSubmit={handleSubmit}>
     //   <input type="text" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist"/>

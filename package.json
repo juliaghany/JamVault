@@ -24,8 +24,7 @@
   "homepage": "https://github.com/juliaghany/project-3#readme",
   "devDependencies": {
     "concurrently": "^8.2.0",
-    "nodemon": "^2.0.22",
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
+    "nodemon": "^2.0.22"
   },
   "dependencies": {
     "axios": "^1.4.0",
