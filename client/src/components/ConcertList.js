@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PostForm from './PostForm';
+import { Card, Button } from 'react-bootstrap';
 
 const ConcertList = ({ results }) => {
   const [selectedConcert, setSelectedConcert] = useState(null);
@@ -15,16 +16,24 @@ const ConcertList = ({ results }) => {
   };
 
   return (
-    <div>
-      {results.map((concert, index) => (
-        <div key={index} onClick={() => handleSelectConcert(concert)}>
-          <h2>{concert.artist}</h2>
-          <img src={concert.image} alt={concert.title} />
-          <p>{concert.date}</p>
-          <p>{concert.city}, {concert.country}</p>
-          <p>Venue: {concert.venue}</p>
-        </div>
-      ))}
+    <div className="d-flex flex-wrap justify-content-center">
+      {results.map((concert, index) => {
+        const date = new Date(concert.date);
+        const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+        return (
+          <Card style={{ width: '18rem', margin: '1rem' }} key={index}>
+            <Card.Img variant="top" src={concert.image} />
+            <Card.Body>
+              <Card.Title>{`${concert.artist} at ${concert.venue}`}</Card.Title>
+              <Card.Text>
+                {formattedDate} <br />
+                {concert.city}, {concert.country}
+              </Card.Text>
+              <Button variant="primary" onClick={() => handleSelectConcert(concert)}>Share Experience</Button>
+            </Card.Body>
+          </Card>
+        );
+      })}
       {selectedConcert && <PostForm concert={selectedConcert} onClose={handleCloseModal} isModalOpen={isModalOpen} />}
     </div>
   );

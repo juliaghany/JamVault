@@ -3,6 +3,9 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { CONCERT_BY_DESCRIPTION, ADD_CONCERT, ADD_POST } from '../utils/mutations';
 import MediaUpload from './MediaUpload';
+import '../styles/PostForm.css'
+import { Row, Col } from 'react-bootstrap';
+
 
 const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [review, setReview] = useState('');
@@ -63,10 +66,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
                 })
             );
 
-            const photos = uploadedUrls.filter(url => url.endsWith('.jpg') || url.endsWith('.png'));
-            const videos = uploadedUrls.filter(url => url.endsWith('.mp4') || url.endsWith('.avi'));
-
-            await addPost({ variables: { post: { concertId, review, photos, videos } } });
+            await addPost({ variables: { post: { concertId, review, media: uploadedUrls } } });
 
             onClose();
             setError('');
@@ -81,19 +81,30 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     return (
         <Modal show={isModalOpen} onHide={onClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Write a post about {concert.title}</Modal.Title>
+                <Modal.Title style={{ fontWeight: "bold" }}>Write a post about this {concert.artist} show!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Concert Info</Form.Label>
-                        <Form.Control plaintext readOnly defaultValue={`${concert.title} by ${concert.artist} at ${concert.venue}, ${concert.city}, ${concert.country} on ${new Date(concert.date).toLocaleDateString()}`} />
-                    </Form.Group>
+                    {[
+                        { label: "Artist", value: concert.artist },
+                        { label: "Venue", value: concert.venue },
+                        { label: "City", value: concert.city },
+                        { label: "Country", value: concert.country },
+                        { label: "Date", value: new Date(concert.date).toLocaleDateString() },
+                    ].map((field) => (
+                        <Form.Group as={Row}>
+                            <Form.Label column sm={2} style={{ fontWeight: "bold", textAlign: "right" }}>{field.label}:</Form.Label>
+                            <Col sm={10}>
+                                <Form.Control style={{ backgroundColor: "#e9ecef", borderColor: "#e9ecef" }} type="text" readOnly defaultValue={field.value} />
+                            </Col>
+                        </Form.Group>
+                    ))}
 
                     <Form.Group>
-                        <Form.Label>Review</Form.Label>
+                        <Form.Label style={{ fontWeight: "bold", textAlign: "center", display: "block" }}>Write your concert review!</Form.Label>
                         <Form.Control
-                            type="text"
+                            as="textarea"
+                            rows={3}
                             value={review}
                             onChange={(event) => setReview(event.target.value)}
                             placeholder="Write your review here..."
@@ -102,7 +113,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
 
                     <MediaUpload onMediaSelected={handleMedia} />
 
-                    <Button variant="primary" type="submit">Post</Button>
+                    <Button variant="primary" type="submit" style={{ width: '100%', marginTop: '1rem' }}>Post</Button>
                     {isSubmitting && <p>Loading...</p>}
                     {error && <p>{error}</p>}
                 </Form>
@@ -110,5 +121,6 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
         </Modal>
     );
 };
+
 
 export default PostForm;
