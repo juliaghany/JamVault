@@ -29,3 +29,5 @@ const userPosts = () => {
         </>
     )
 }
+
+export default userPosts
