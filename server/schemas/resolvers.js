@@ -29,7 +29,7 @@ const resolvers = {
           throw error;
         }
       },
-        addPost: async (parent, { title, content, concertId, photos, videos }, context) => {
+      addPost: async (parent, { review, concertId, media }, context) => {
 
             const authHeader = context.req.headers.authorization;
         
@@ -55,8 +55,7 @@ const resolvers = {
       const newPost = await Post.create({
         review,
         concert: concert._id,
-        photos,
-        videos,
+        media,
         user: user._id
       });
 

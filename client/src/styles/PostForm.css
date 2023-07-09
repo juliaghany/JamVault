@@ -1,0 +1,5 @@
+.readonly-input:read-only {
+    background: #f8f9fa !important;
+    border-color: #ced4da !important;
+    color: #495057;
+}

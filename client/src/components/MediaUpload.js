@@ -4,7 +4,6 @@ const MediaUpload = () => {
 
     const [media, setMedia] = useState('')
     const [mediaName, setMediaName] = useState('Choose File')
-    const [uploadedMedia, setUploadedMedia] = useState({})
 
     const handleMedia = (e) => {
         setMedia(e.target.files[0])

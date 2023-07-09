@@ -24,12 +24,11 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_POST = gql`
-  mutation addPost($concertId: ID!, $review: String!, $photos: [String], $videos:[String]) {
-    addPost(concertId: $concertId, review: $review, photos: $photos, videos: $videos) {
+  mutation addPost($concertId: ID!, $review: String!, $media: [String]) {
+    addPost(concertId: $concertId, review: $review, media: $media) {
         _id
         review
-        photos
-        videos
+        media
         user {
             _id
             username
