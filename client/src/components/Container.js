@@ -5,6 +5,7 @@ import UserTimeline from '../pages/UserTimeline.js';
 import Login from '../pages/LoginForm.js';
 import Signup from '../pages/SignupForm.js';
 import Header from '../components/Header.js'
+import Footer from '../components/Footer.js'
 
 
 export default function Container() {
@@ -33,7 +34,7 @@ export default function Container() {
         <div>
             <Header currentPage={currentPage} handlePageChange={handlePageChange} />
             {renderPage()}
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 }

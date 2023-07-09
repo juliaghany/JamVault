@@ -1,33 +1,40 @@
-// // UserTimeline.js
-
-import React, {useState} from "react";
-import { Card } from 'react-bootstrap'
+import React, { useState, useEffect } from "react";
+import { Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 import PostList from "../components/PostList";
-
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_POSTS } from "../utils/queries";
+import Auth from '../utils/auth';
 
-const userPosts = () => {
-    const { loading, data } = useQuery(QUERY_USER_POSTS)
+const UserPosts = () => {
+  const { loading, data } = useQuery(QUERY_USER_POSTS);
+  const posts = data?.posts || [];
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const navigate = useNavigate();
 
-    const posts = data?.posts || []
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
-    return (
-        <>
-        <Card>
-            {loading ? (
-                <div>loading...</div>
-            ) : (
-                <PostList
-                posts= {posts}
-                title="Oh all the places you've been"/>
-            )
-        }
-        </Card>
-        
-        </>
-    )
-}
+  if (!isLoggedIn) {
+    navigate("/login");
+    return null;
+  }
 
-export default userPosts
+  return (
+    <>
+      <Card>
+        {loading ? (
+          <div>loading...</div>
+        ) : (
+          <PostList posts={posts} title="Oh all the places you've been" />
+        )}
+      </Card>
+    </>
+  );
+};
+
+export default UserPosts;
