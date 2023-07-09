@@ -1,19 +1,29 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 const MediaUpload = () => {
 
     const [media, setMedia] = useState('')
     const [mediaName, setMediaName] = useState('Choose File')
 
+    useEffect(()=>{
+      console.log({media,mediaName})
+      //debugger;
+    }, [media, mediaName])
+
     const handleMedia = (e) => {
         setMedia(e.target.files[0])
         setMediaName(e.target.files[0].name)
+        //debugger;
+        handleSubmit(e);
+        //handleSubmit();
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
         const formData = new FormData()
-        formData.append('media', media)
-
+        //formData.append('media', media)
+        formData.append('media', e.target.files[0])
+        window.lastUploadingFile = e.target.files[0] //need to stop propogation 
+//get the e.target in postform and check its files 
         try {
           const response = await fetch("/uploads", {
             method:"POST",
@@ -23,6 +33,7 @@ const MediaUpload = () => {
           if(response.ok) {
             console.log("successful")
           } else {
+            //debugger;
             console.error("unsuccessful")
           }
 
@@ -44,7 +55,7 @@ const MediaUpload = () => {
           </label>
         </div>
 
-        <button type='submit' className='btn btn-primary btn-block mt-4'> Upload</button>
+        {/*<button type='submit' className='btn btn-primary btn-block mt-4'> Upload</button>*/}
       </form>
     </>
   );

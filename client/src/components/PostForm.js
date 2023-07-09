@@ -22,18 +22,20 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [addPost] = useMutation(ADD_POST);
 
     useEffect(() => {
-        if (queryLoading) {
-          console.log('Query is loading');
-        } else if (queryError) {
-          console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
-        } else {
-          console.log('Query completed', concertData);
-          if (!concertData?.concertByDescription) {
-            console.log('Concert not found in database, adding it now', concert);
+      if (queryLoading) {
+        console.log('Query is loading');
+      } else if (queryError) {
+        console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
+      } else {
+        console.log('Query completed', concertData);
+        if (!concertData?.concertByDescription) {
+          console.log('Concert not found in database, adding it now', concert);
+          console.log("***** concert info after not found ****")
+          console.log(concert)
             addConcert({ variables: concert })
               .then(() => console.log('Concert successfully added to database'))
               .catch((err) => console.error('Error adding concert to database:', err));
-          }
+          }  
         }
       }, [concertData, queryLoading, queryError, addConcert, concert]);      
 
@@ -43,8 +45,11 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        console.log({review,mediaFiles})
+        console.log(window.lastUploadingFile)
       
-        if (!review || !mediaFiles.length) {
+        if (review.length===0 || !window.lastUploadingFile) {
           setError('Please enter all required fields.');
           return;
         }

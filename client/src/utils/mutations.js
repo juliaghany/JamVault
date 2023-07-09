@@ -60,7 +60,7 @@ export const VOTE_POST = gql`
 `;
 
 export const ADD_CONCERT = gql`
-  mutation addConcert($description: String!, $date: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String) {
+  mutation addConcert($description: String!, $date: String!, $artist: String!, $venue: String!, $city: String!, $country: String!, $image: String!) {
     addConcert(description: $description, date: $date, artist: $artist, venue: $venue, city: $city, country: $country, image: $image) {
         _id
         description

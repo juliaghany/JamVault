@@ -26,6 +26,12 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
 
+app.use((req,res,next)=>{
+  console.log(req.method + " " + " " + req.originalUrl)
+  console.log(req?.body)
+  next();
+})
+
 app.use(fileUpload());
 app.use('/api', searchRouter);
 
@@ -33,6 +39,9 @@ app.use('/api', searchRouter);
 
 app.post('/uploads', (req, res) => {
     if(req.files === null) {
+      console.log("**** file upload error server ***")
+      console.log(req.files)
+      console.log(req.files.media)
         return res.status(400).json({message: 'no file was uploaded'})
     }
 
