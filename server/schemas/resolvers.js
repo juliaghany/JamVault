@@ -31,44 +31,38 @@ const resolvers = {
       },
       addPost: async (parent, { review, concertId, media }, context) => {
 
-            const authHeader = context.req.headers.authorization;
-        
-            if (!authHeader) {
-                throw new AuthenticationError('Authorization header must be provided');
-            }
-
-      const token = authHeader.split(' ')[1];
-      let user;
-
-      try {
-        user = jwt.verify(token, process.env.JWT_SECRET);
-      } catch (err) {
-        throw new AuthenticationError('Invalid/Expired token');
-      }
-
-      let concert = await Concert.findOne({ description: concertDescription });
-
-      if (!concert) {
-        concert = await Concert.create({ description: concertDescription, /* other concert details */ });
-      }
+        const authHeader = context.req.headers.authorization;
       
-      const newPost = await Post.create({
-        review,
-        concert: concert._id,
-        media,
-        user: user._id
-      });
-
-      return newPost;
-    },
+        if (!authHeader) {
+          throw new AuthenticationError('Authorization header must be provided');
+        }
+      
+        const token = authHeader.split(' ')[1];
+        let user;
+      
+        try {
+          user = jwt.verify(token, process.env.JWT_SECRET);
+        } catch (err) {
+          throw new AuthenticationError('Invalid/Expired token');
+        }
+      
+        const newPost = await Post.create({
+          review,
+          concert: concertId,
+          media,
+          user: user._id
+        });
+      
+        return newPost;
+    },      
     votePost: async (parent, { postId }) => {
       const post = await Post.findById(postId);
       post.votes += 1;
       await post.save();
       return post;
     },
-    addConcert: async (parent, { title, date, description, location, artist, venue, city, country, image }) => {
-      return Concert.create({ title, date, description, location, artist, venue, city, country, image });
+    addConcert: async (parent, { date, description, artist, venue, city, country, image }) => {
+      return Concert.create({ date, description, artist, venue, city, country, image });
     },
     addConcertToUser: async (parent, { userId, concertId }) => {
       const user = await User.findById(userId);
