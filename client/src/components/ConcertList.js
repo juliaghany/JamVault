@@ -7,7 +7,8 @@ const ConcertList = ({ results }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelectConcert = (concert) => {
-    setSelectedConcert(concert);
+    //setSelectedConcert(concert);
+    setSelectedConcert({ ...concert, description: concert.description });
     setIsModalOpen(true);
   };
 
