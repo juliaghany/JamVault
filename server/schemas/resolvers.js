@@ -17,6 +17,9 @@ const resolvers = {
     concertByDescription: async (_, { description }) => {
         return Concert.findOne({ description });
     },
+    userPosts: async (parent, {userId}) => {
+      return await Post.find({_id: userId})
+    }
   },
 
     Mutation: {
@@ -62,7 +65,9 @@ const resolvers = {
       return post;
     },
     addConcert: async (parent, { date, description, artist, venue, city, country, image }) => {
-      return Concert.create({ date, description, artist, venue, city, country, image });
+      let concertAdded = await Concert.create({ date, description, artist, venue, city, country, image });
+      console.log("***** concert added *****")
+      return concertAdded;
     },
     addConcertToUser: async (parent, { userId, concertId }) => {
       const user = await User.findById(userId);
