@@ -8,7 +8,7 @@ import PostList from "../components/PostList";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_POSTS } from "../utils/queries";
 
-const userPosts = () => {
+const UserPosts = () => {
     const { loading, data } = useQuery(QUERY_USER_POSTS)
 
     const posts = data?.posts || []
@@ -30,4 +30,4 @@ const userPosts = () => {
     )
 }
 
-export default userPosts
+export default UserPosts
