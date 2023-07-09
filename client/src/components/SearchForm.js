@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { ScaleLoader } from "react-spinners";
 
 const SearchForm = ({ setResults }) => {
   const [artist, setArtist] = useState("");
   const [minDate, setMinDate] = useState("");
   const [maxDate, setMaxDate] = useState("");
-  const [setIsLoading] = useState(false);
-  const [setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,7 +40,6 @@ const SearchForm = ({ setResults }) => {
   };
 
   return (
-
     <div className="container-fluid py-5" style={{ marginTop: '240px' }}>
       <div className="row justify-content-center">
         <div className="col-lg-8">
@@ -59,22 +59,19 @@ const SearchForm = ({ setResults }) => {
               </div>
               <button className="btn btn-dark btn-lg" type="submit">Search</button>
             </form>
+  
+            {isLoading && <ScaleLoader color="#F23D5E" />}
+            
+            {error && <div>Error: {error}</div>}
+  
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 
 export default SearchForm;
-
-//     <form onSubmit={handleSubmit}>
-//       <input type="text" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist"/>
-//       <input type="date" value={minDate} onChange={(e) => setMinDate(e.target.value)} placeholder="Min Date"/>
-//       <input type="date" value={maxDate} onChange={(e) => setMaxDate(e.target.value)} placeholder="Max Date"/>
-//       <button type="submit">Search</button>
-//     </form>
 
     // <form onSubmit={handleSubmit}>
     //   <input type="text" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist"/>
