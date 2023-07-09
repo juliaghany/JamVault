@@ -7,7 +7,7 @@ import '../styles/Navbar.css'
 
 const styles = {
     nav: {
-        padding: '40px',
+        padding: '30px',
         marginBottom: '25px',
         background: 'linear-gradient(to bottom, #BF3480, #A62991, #F26666, rgba(0, 0, 0, 0) 100%)'
     },
@@ -21,7 +21,6 @@ const styles = {
     navLink: {
         fontSize: '20px', 
         color: 'black',
-        // marginRight: '10px',
     },
 }
 
@@ -43,7 +42,7 @@ function NavBar({ currentPage, handlePageChange }) {
         }
     }
     return (
-        <Navbar variant="dark" expand="lg" fixed="top" style={styles.nav}>
+     <Navbar variant="dark" expand="lg" fixed="top" style={styles.nav}>
             <div className="d-flex align-items-center">
                 <Navbar.Brand style={styles.brand} onClick={() => handlePageChange('Home')}>
                     JamVault
@@ -70,42 +69,3 @@ function NavBar({ currentPage, handlePageChange }) {
 }
 
 export default NavBar;
-
-//         <ul className='nav nav-tabs'>
-//             <li className='nav-item'>
-//                 <a
-//                     href='#home'
-//                     onClick={() => handlePageChange('Home')}
-//                     className={currentPage === 'About' ? 'nav-link active' : 'nav-link'}
-//                 >
-//                     Home
-//                 </a>
-//             </li>
-//             <li className='nav-item'>
-//                 <a
-//                     href='#concert'
-//                     onClick={handleClick}
-//                     className={currentPage === 'Concert' ? 'nav-link active' : 'nav-link'}
-//                 >
-//                     Concert 
-//                 </a>
-//             </li>
-//             <li className='nav-item'>
-//                 <a
-//                     href='#timeline'
-//                     onClick={handleClick}
-//                     className={currentPage === 'UserTimeline' ? 'nav-link active' : 'nav-link'}
-//                 >
-//                     Timeline
-//                 </a>
-//             </li>
-//             <li className='nav-item'>
-//                 <a
-//                     href='#login'
-//                     onClick={() => handlePageChange('Login')}
-//                     className={currentPage === 'Login' ? 'nav-link active' : 'nav-link'}
-//                 >
-//                     Login
-//                 </a>
-//             </li>
-//         </ul>
