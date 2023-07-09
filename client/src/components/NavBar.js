@@ -69,35 +69,3 @@ function NavBar({ currentPage, handlePageChange }) {
 }
 
 export default NavBar;
-
-   
-{/* <Navbar variant="dark" expand="lg" fixed="top" style={styles.nav}>
-    <div className="d-flex align-items-center">
-        <Navbar.Brand style={styles.brand} onClick={() => handlePageChange('Home')}>
-            JamVault
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
-    </div>
-    <Navbar.Collapse id="navbar-nav">
-        <Nav className="custom-link" style={{ marginLeft: 'auto' }}>
-            <div className="d-flex">
-                <div style={{ flex: 1 }}>
-                    <Nav.Link onClick={() => handlePageChange('Home')} style={styles.navLink}>Home</Nav.Link>
-                </div>
-                <div style={{ flex: 1 }}>
-                    <Nav.Link onClick={handleClick} style={styles.navLink}>Concert</Nav.Link>
-                </div>
-                <div style={{ flex: 1 }}>
-                    <Nav.Link onClick={handleClick} style={styles.navLink}>Timeline</Nav.Link>
-                </div>
-                <div style={{ flex: 1 }}>
-                    {AuthService.loggedIn() ? (
-                        <Nav.Link onClick={logout} style={styles.navLink}>Logout</Nav.Link>
-                    ) : (
-                        <Nav.Link onClick={() => handlePageChange('Login')} style={styles.navLink}>Login</Nav.Link>
-                    )}
-                </div>
-            </div>
-        </Nav>
-    </Navbar.Collapse>
-</Navbar> */}
