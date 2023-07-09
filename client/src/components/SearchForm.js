@@ -29,6 +29,7 @@ const SearchForm = ({ setResults }) => {
           venue: concert.location.name,
           image: concert.image
         }));
+        console.log('Fetched concerts:', concerts);
         setResults(concerts);
       })
       .catch((error) => {
