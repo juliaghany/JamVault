@@ -1,15 +1,31 @@
 // // UserTimeline.js
 
-// import React, {useState} from "react";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_USER_POSTS } from "../utils/queries";
+import React, {useState} from "react";
+import { Card } from 'react-bootstrap'
 
-// const userPosts = () => {
+import PostList from "../components/PostList";
 
-//     const [userState, setUserState] = useState({
-//         media: ''
-//     })
-//     const { userId } = useParams()
+import { useQuery } from "@apollo/client";
+import { QUERY_USER_POSTS } from "../utils/queries";
 
-//     const { loading, data } = useQuery(QUERY_USER_POSTS,)
-// }
+const userPosts = () => {
+    const { loading, data } = useQuery(QUERY_USER_POSTS)
+
+    const posts = data?.posts || []
+
+    return (
+        <>
+        <Card>
+            {loading ? (
+                <div>loading...</div>
+            ) : (
+                <PostList
+                posts= {posts}
+                title="Oh all the places you've been"/>
+            )
+        }
+        </Card>
+        
+        </>
+    )
+}
