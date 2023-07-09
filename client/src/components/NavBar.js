@@ -30,6 +30,10 @@ const styles = {
 function NavBar({ currentPage, handlePageChange }) {
 
     const isLoggedIn = AuthService.loggedIn();
+    const logout = (event) => {
+        event.preventDefault()
+        AuthService.logout()
+    } 
 
     const handleClick = (tab) => {
         if (currentPage !== 'tab' && !isLoggedIn) {
@@ -51,7 +55,14 @@ function NavBar({ currentPage, handlePageChange }) {
                     <Nav.Link onClick={() => handlePageChange('Home')} style={styles.navLink}>Home</Nav.Link>
                     <Nav.Link onClick={handleClick} style={styles.navLink}>Concert</Nav.Link>
                     <Nav.Link onClick={handleClick} style={styles.navLink}>Timeline</Nav.Link>
-                    <Nav.Link onClick={() => handlePageChange('Login')} style={styles.navLink}>Login</Nav.Link>
+                    <div>
+                        {AuthService.loggedIn() ? (
+                            <Nav.Link onClick={logout} style={styles.navLink}>Logout</Nav.Link>
+                        ) : (
+                            <Nav.Link onClick={() => handlePageChange('Login')} style={styles.navLink}>Login</Nav.Link>
+                        )}
+                    </div>
+                  
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
@@ -98,3 +109,21 @@ export default NavBar;
 //                 </a>
 //             </li>
 //         </ul>
+
+
+{/* <div>
+{Auth.loggedIn() ? (
+  <button className="btn btn-lg btn-light m-2" onClick={logout}>
+    Logout
+  </button>
+) : (
+  <>
+    <Link className="btn btn-lg btn-primary m-2" to="/login">
+      Login
+    </Link>
+    <Link className="btn btn-lg btn-light m-2" to="/signup">
+      Signup
+    </Link>
+  </>
+)}
+</div> */}
