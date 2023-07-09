@@ -17,7 +17,7 @@ const ConcertList = ({ results }) => {
   };
 
   return (
-    <div className="d-flex flex-wrap justify-content-center">
+    <div className="d-flex flex-wrap justify-content-center" style={{ marginBottom: '60px'}}>
       {results.map((concert, index) => {
         const date = new Date(concert.date);
         const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
