@@ -17,6 +17,9 @@ const resolvers = {
     concertByDescription: async (_, { description }) => {
         return Concert.findOne({ description });
     },
+    userPosts: async (parent, {userId}) => {
+      return await Post.find({_id: userId})
+    }
   },
 
     Mutation: {

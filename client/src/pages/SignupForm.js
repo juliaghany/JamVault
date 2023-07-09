@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 const styles = {
   background: {
@@ -49,11 +49,11 @@ console.log("hello")
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100" style={{ marginTop: '50px'}}>
-      <Form onSubmit={handleSubmit} style={styles.background}>
+      <Form onSubmit={(event)=> { handleSubmit(event) }} style={styles.background}>
         {data ? (
           <p>
             Success! You may now head{' '}
-            <Link to="/">back to the homepage.</Link>
+            <a href="/">back to the homepage.</a>
           </p>
         ) : (
           <>

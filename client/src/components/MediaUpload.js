@@ -10,8 +10,7 @@ const MediaUpload = () => {
         setMediaName(e.target.files[0].name)
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const handleSubmit = async () => {
         const formData = new FormData()
         formData.append('media', media)
 
@@ -29,14 +28,15 @@ const MediaUpload = () => {
 
 
         } catch(error) {
+          console.log("Ran here MediaUpload error caught")
           console.log(error)
         }
 
     }
 
   return (
-    <Fragment>
-      <form onSubmit={handleSubmit}>
+    <>
+      <form onSubmit={(event)=> { event.preventDefault(); handleSubmit() }}>
         <div className="custom-file mb-4">
           <input type="file" className="custom-file-input" id="customFile" onChange={handleMedia} />
           <label className="custom-file-label" htmlFor="customFile">
@@ -46,7 +46,7 @@ const MediaUpload = () => {
 
         <button type='submit' className='btn btn-primary btn-block mt-4'> Upload</button>
       </form>
-    </Fragment>
+    </>
   );
 };
 
