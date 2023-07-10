@@ -41,7 +41,7 @@ const SearchForm = ({ setResults }) => {
   };
 
   return (
-    <div className="container-fluid py-5" style={{ marginTop: '180px' }}>
+    <div className="container-fluid py-5" style={{ marginTop: '240px' }}>
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="d-flex flex-column flex-lg-row">
@@ -58,14 +58,16 @@ const SearchForm = ({ setResults }) => {
               <div className="form-group mb-4">
                 <input className="form-control form-control-lg mb-3" type="date" value={maxDate} onChange={(e) => setMaxDate(e.target.value)} placeholder="Max Date" />
               </div>
-              <button className="btn btn-dark btn-lg" type="submit">Search</button>
+              <button className="btn btn-dark btn-lg nav-btn" type="submit">Search</button>
               {isLoading && <ScaleLoader color="#F23D5E" />}
+              {error && <div style={{ marginTop: '10px'}}>{error}</div>}
+
             </form>
   
             {/* {isLoading && <ScaleLoader color="#F23D5E" />} */}
             
-            {error && <div>Error: {error}</div>}
-  
+            {/* {error && <div>Error: {error}</div>}
+   */}
           </div>
         </div>
       </div>
