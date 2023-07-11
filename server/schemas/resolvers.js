@@ -14,8 +14,8 @@ const resolvers = {
     posts: async () => {
       return Post.find({});
     },
-    concertByDescription: async (_, { description }) => {
-        return Concert.findOne({ description });
+    concertPost: async( _,{ concertId }) => {
+        return Post.findOne({ _id: concertId });
     },
     userPosts: async (parent, {userId}) => {
       return await Post.find({_id: userId})

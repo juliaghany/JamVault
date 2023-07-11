@@ -3,8 +3,7 @@ import { gql } from '@apollo/client'
 export const QUERY_USER_POSTS = gql`
 query userPosts($userId: ID!) {
     Post(userId: $userId) {
-        title
-        content
+        review
         media
         concert
         votes
@@ -12,17 +11,18 @@ query userPosts($userId: ID!) {
         User {
             username
         }
+        Concert {
+          description
+        }
     }
 }
 `;
 
 export const QUERY_CONCERT_POSTS = gql`
-query getConcertPosts ($concertDescription: description!) {
-    Post (concertDescription: $concertDescription) {
-        title
-        content
-        photos
-        videos
+query getConcertPosts ($concertId: ID!) {
+    Post (concertId: $concertId) {
+        review
+        media
         concert
         votes
         createdAt
