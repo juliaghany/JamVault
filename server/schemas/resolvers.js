@@ -15,8 +15,8 @@ const resolvers = {
     posts: async () => {
       return Post.find({});
     },
-    concertByDescription: async (_, { description }) => {
-        return Concert.findOne({ description });
+    concertPosts: async( _,{ concertId }) => {
+        return Post.findOne({ _id: concertId });
     },
     userPosts: async (parent, { userId }, context) => {
       console.log("userId: ", userId);
@@ -40,6 +40,9 @@ const resolvers = {
         }
       },
       addPost: async (parent, { concertId, review, media }, context) => {
+
+        console.log(context)
+
         const authHeader = context.req.headers.authorization;
       
         if (!authHeader) {
@@ -50,7 +53,7 @@ const resolvers = {
         let user;
       
         try {
-          user = jwt.verify(token, process.env.JWT_SECRET);
+          user = jwt.verify(token, 'mysecretssshhhhhhh');
           console.log('***USER IN RESOLVER***: ', user); 
         } catch (err) {
           throw new AuthenticationError('Invalid/Expired token');

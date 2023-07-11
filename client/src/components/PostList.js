@@ -1,6 +1,6 @@
 import React from "react"
 
-const PostList = ({ posts, media }) => {
+const PostList = ({ posts }) => {
     if (!posts.length) {
         return <h3>You have no posts</h3>
     }
@@ -12,9 +12,8 @@ const PostList = ({ posts, media }) => {
             posts.map((post) => (
                 <div key={post._id} className="card mb-3">
                     <p>Posted by: {post.user.username}</p>
-                    <p>Review: {post.review}</p>
-                    <p>ID: {post.id}</p>
-                    <img src={post.media} alt={post.title}/>
+                    <img src={post.media} alt={post.review}/>
+                    <p>{post.review}</p>
                     <p><small>{post.createdAt}</small></p>
                 </div>
             ))

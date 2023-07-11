@@ -46,8 +46,10 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
         }
     }, [queryLoading, queryError, concertData, addConcert, concert]);    
       
+    const randomFunction = (mediaPath) => {console.log("random function", mediaPath)}
 
     const handleMedia = (mediaFile) => {
+        console.log("media file", mediaFile)
         setMediaFiles(oldMediaFiles => [...oldMediaFiles, mediaFile]);
     };
 
@@ -56,7 +58,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     
         console.log({review,mediaFiles})
         console.log(window.lastUploadingFile)
-    
+    // is this the line of code we need to modify so that the user can make a post without a photo?
         if (review.length===0 || !window.lastUploadingFile) {
             setError('Please enter all required fields.');
             return;
@@ -100,7 +102,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     return (
         <Modal show={isModalOpen} onHide={() => { onClose(); setSubmitStatus(''); }}>
             <Modal.Header closeButton>
-                <Modal.Title style={{ fontWeight: "bold" }}>Write a post about this {concert.artist} show!</Modal.Title>
+                <Modal.Title style={{ fontWeight: "bold" }}>Share your experience</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
@@ -120,7 +122,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
                     ))}
 
                     <Form.Group>
-                        <Form.Label style={{ fontWeight: "bold", textAlign: "center", display: "block" }}>Write your concert review!</Form.Label>
+                        <Form.Label style={{ fontWeight: "bold", textAlign: "center", display: "block" }}></Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -130,9 +132,9 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
                         />
                     </Form.Group>
 
-                    <MediaUpload onMediaSelected={handleMedia} />
+                    <MediaUpload onMediaSelected={handleMedia} findMediaPath={randomFunction}/>
 
-                    <Button variant="primary" type="submit" style={{ width: '100%', marginTop: '1rem' }}>Post</Button>
+                    <Button variant="dark" type="submit" style={{ width: '100%', marginTop: '1rem' }}>Post</Button>
                     {isSubmitting && <p>Loading...</p>}
                     {error && <p>{error}</p>}
                     {submitStatus === 'loading' && <p>Submitting...</p>}
