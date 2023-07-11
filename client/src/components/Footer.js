@@ -10,8 +10,9 @@ const Footer = () => {
             bottom: 0,
             width: '100%',
             position: 'fixed',
+            fontFamily: 'Raleway, sans-serif',
         }}>
-            Made with ❤️ 
+            <strong>Made with ❤️ </strong>
         </div>
     )
 }
