@@ -10,7 +10,8 @@ const PostList = ({ posts, media }) => {
             <h3>Oh all the places you've been</h3>
             {posts &&
             posts.map((post) => (
-                <div key={post.id} className="card mb-3">
+                <div key={post._id} className="card mb-3">
+                    <p>Posted by: {post.user.username}</p>
                     <img src={post.media} alt={post.title}/>
                     <p><small>{post.createdAt}</small></p>
                 </div>
@@ -20,5 +21,4 @@ const PostList = ({ posts, media }) => {
     )
 }
 
-
-export default PostList
+export default PostList;

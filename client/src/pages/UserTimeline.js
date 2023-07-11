@@ -1,28 +1,29 @@
-// import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card } from 'react-bootstrap';
-// import { useNavigate } from 'react-router-dom';
 
 import PostList from "../components/PostList";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_POSTS } from "../utils/queries";
-// import Auth from '../utils/auth';
+import Auth from '../utils/auth';
 
-const UserPosts = () => {
-  const { loading, data } = useQuery(QUERY_USER_POSTS);
-  const posts = data?.posts || [];
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // const navigate = useNavigate();
+const UserTimeline = () => {
+  const userId = Auth.getProfile().data._id;
+  const { loading, data, error } = useQuery(QUERY_USER_POSTS, {
+    variables: { userId }
+  });
 
-  // useEffect(() => {
-  //   if (!Auth.loggedIn()) {
-  //     setIsLoggedIn(false);
-  //   }
-  // }, []);
+  console.log("userId: ", userId);
+  console.log("loading: ", loading); 
+  console.log("error: ", error); 
+  console.log("data: ", data);
+  
+  if (error) {
+    console.error("GraphQL error occurred while fetching user posts:", error);
+  }
+  
+  console.log("Fetched data:", data);  
 
-  // if (!isLoggedIn) {
-  //   navigate("/login");
-  //   return null;
-  // }
+  const posts = data?.userPosts || [];
 
   return (
     <>
@@ -30,11 +31,11 @@ const UserPosts = () => {
         {loading ? (
           <div>loading...</div>
         ) : (
-          <PostList posts={posts} title="Oh all the places you've been" />
+          <PostList posts={posts} title="Your Posts" />
         )}
       </Card>
     </>
   );
 };
 
-export default UserPosts;
+export default UserTimeline;

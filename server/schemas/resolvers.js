@@ -2,6 +2,7 @@ const { User, Concert, Post } = require('../models');
 const { AuthenticationError } = require('apollo-server-errors');
 const jwt = require('jsonwebtoken');
 const { signToken } = require('../utils/auth');
+const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
@@ -17,9 +18,15 @@ const resolvers = {
     concertByDescription: async (_, { description }) => {
         return Concert.findOne({ description });
     },
-    userPosts: async (parent, {userId}) => {
-      return await Post.find({_id: userId})
-    }
+    userPosts: async (parent, { userId }, context) => {
+      console.log("userId: ", userId);
+    
+      const posts = await Post.find({ user: userId });
+    
+      console.log("posts: ", posts);
+    
+      return posts;
+    },
   },
 
     Mutation: {
