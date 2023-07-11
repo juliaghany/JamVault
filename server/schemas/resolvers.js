@@ -32,32 +32,38 @@ const resolvers = {
           throw error;
         }
       },
-      addPost: async (parent, { review, concertId, media }, context) => {
-
+      addPost: async (parent, { concertId, review, media }, context) => {
         const authHeader = context.req.headers.authorization;
       
         if (!authHeader) {
           throw new AuthenticationError('Authorization header must be provided');
         }
-      
+    
         const token = authHeader.split(' ')[1];
         let user;
       
         try {
           user = jwt.verify(token, process.env.JWT_SECRET);
+          console.log('***USER IN RESOLVER***: ', user); 
         } catch (err) {
           throw new AuthenticationError('Invalid/Expired token');
         }
       
-        const newPost = await Post.create({
-          review,
-          concert: concertId,
-          media,
-          user: user._id
-        });
+        let newPost;
+        try {
+          newPost = await Post.create({
+            review,
+            concert: concertId,
+            media,
+            user: user.data._id
+          });
+        } catch (err) {
+          console.error('Error creating post:', err);
+          throw new Error('Failed to create post');
+        }
       
         return newPost;
-    },      
+      },          
     votePost: async (parent, { postId }) => {
       const post = await Post.findById(postId);
       post.votes += 1;

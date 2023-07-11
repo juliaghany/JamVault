@@ -8,6 +8,7 @@ const typeDefs = gql`
         concerts: [Concert]
         posts: [Post]
     }
+    
     type Auth {
         token: ID!
         user: User
@@ -34,6 +35,12 @@ const typeDefs = gql`
         votes: Int!
     }
 
+    input PostInput {
+        concertId: ID!
+        review: String!
+        media: [String]
+      }      
+
     type Query {
         users: [User]
         concerts: [Concert]
@@ -45,7 +52,7 @@ const typeDefs = gql`
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): User
-        addPost(title: String!, content: String!, userId: ID!, concertId: ID!, photos: [String], videos: [String]): Post
+        addPost(concertId: ID!, review: String! media: [String]): Post
         votePost(postId: ID!): Post
         addConcert(description: String!, date: String!, artist: String!, venue: String!, city: String!, country: String!, image: String!): Concert
         addConcertToUser(userId: ID!, concertId: ID!): User

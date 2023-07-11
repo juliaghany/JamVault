@@ -26,24 +26,24 @@ export const LOGIN_USER = gql`
 export const ADD_POST = gql`
   mutation addPost($concertId: ID!, $review: String!, $media: [String]) {
     addPost(concertId: $concertId, review: $review, media: $media) {
+      _id
+      review
+      media
+      user {
         _id
-        review
-        media
-        user {
-            _id
-            username
-            email
-        }
-        concert {
-            _id
-            description
-            date
-            artist
-            venue
-            city
-            country
-        }
-        votes
+        username
+        email
+      }
+      concert {
+        _id
+        description
+        date
+        artist
+        venue
+        city
+        country
+      }
+      votes
     }
   }
 `;
