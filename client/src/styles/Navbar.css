@@ -1,7 +1,3 @@
-.custom-link>:hover {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.nav-btn:hover {
+.nav-link:hover {
     color: rgba(255, 255, 255, 0.7) !important;
 }
