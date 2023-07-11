@@ -57,7 +57,7 @@ console.log("hello")
           </p>
         ) : (
           <>
-            {error && <Alert variant="danger">{error.message}</Alert>}
+              {error && <Alert variant="danger">Username or email address already in use. Please try again.</Alert>}
             <h2 className="text-center mb-4">Sign Up</h2>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>

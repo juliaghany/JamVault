@@ -4,6 +4,9 @@ import React from 'react';
 import AuthService from '../utils/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import '../styles/Navbar.css'
+import Concert from '../pages/Concert';
+import Timeline from '../pages/UserTimeline';
+import Home from '../pages/Home';
 
 const styles = {
     nav: {
@@ -26,7 +29,7 @@ const styles = {
 
 
 // renders navigation tabs for different pages
-function NavBar({ currentPage, handlePageChange }) {
+function NavBar({ handlePageChange }) {
 
     const isLoggedIn = AuthService.loggedIn();
     const logout = (event) => {
@@ -34,13 +37,22 @@ function NavBar({ currentPage, handlePageChange }) {
         AuthService.logout()
     } 
 
-    const handleClick = (tab) => {
-        if (currentPage !== 'tab' && !isLoggedIn) {
-            handlePageChange('Login');
-        } else {
-            handlePageChange(tab);
-        }
-    }
+        const handleConcertClick = () => {
+            if (isLoggedIn) {
+                handlePageChange('Concert');
+            } else {
+                handlePageChange('Login');
+            }
+        };
+        
+        const handleTimelineClick = () => {
+            if (isLoggedIn) {
+                handlePageChange('Timeline');
+            } else {
+                handlePageChange('Login');
+            }
+        };
+    
     return (
      <Navbar variant="dark" expand="lg" fixed="top" style={styles.nav}>
             <div className="d-flex align-items-center">
@@ -51,14 +63,14 @@ function NavBar({ currentPage, handlePageChange }) {
             </div>
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto custom-link">
-                    <Nav.Link onClick={() => handlePageChange('Home')} style={styles.navLink}>Home</Nav.Link>
-                    <Nav.Link onClick={handleClick} style={styles.navLink}>Concert</Nav.Link>
-                    <Nav.Link onClick={handleClick} style={styles.navLink}>Timeline</Nav.Link>
+                    <Nav.Link onClick={() => handlePageChange('Home')} style={styles.navLink} href='#home'>Home</Nav.Link>
+                    <Nav.Link onClick={handleConcertClick} style={styles.navLink} href='#concert'>Concert</Nav.Link>
+                    <Nav.Link onClick={handleTimelineClick} style={styles.navLink} href='#timeline'>Timeline</Nav.Link>
                     <div>
                         {AuthService.loggedIn() ? (
                             <Nav.Link onClick={(event)=> { logout(event) }} style={styles.navLink}>Logout</Nav.Link>
                         ) : (
-                            <Nav.Link onClick={() => handlePageChange('Login')} style={styles.navLink}>Login</Nav.Link>
+                                <Nav.Link onClick={() => handlePageChange('Login')} style={styles.navLink} href='#login'>Login</Nav.Link>
                         )}
                     </div>
                   
