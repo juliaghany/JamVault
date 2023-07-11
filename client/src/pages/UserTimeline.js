@@ -1,19 +1,28 @@
 import React from "react";
 import { Card } from 'react-bootstrap';
+import PostList from "../components/PostList";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_POSTS } from "../utils/queries";
 import Auth from '../utils/auth';
-import PostList from '../components/PostList';
 
-const Timeline = () => {
-  const { loading, data } = useQuery(QUERY_USER_POSTS, {
-    variables: { userId: Auth.getProfile().data._id }
+const UserTimeline = () => {
+  const userId = Auth.getProfile().data._id;
+  const { loading, data, error } = useQuery(QUERY_USER_POSTS, {
+    variables: { userId }
   });
 
-  const posts = data?.posts || [];
+  console.log("userId: ", userId);
+  console.log("loading: ", loading); 
+  console.log("error: ", error); 
+  console.log("data: ", data);
+  
+  if (error) {
+    console.error("GraphQL error occurred while fetching user posts:", error);
+  }
+  
+  console.log("Fetched data:", data);  
 
-  console.log(data);
-  console.log(posts);
+  const posts = data?.userPosts || [];
 
   return (
     <>
@@ -21,14 +30,14 @@ const Timeline = () => {
         {loading ? (
           <div>loading...</div>
         ) : (
-          <PostList posts={posts} />
+          <PostList posts={posts} title="Your Posts" />
         )}
       </Card>
     </>
   );
 };
 
-export default Timeline;
+export default UserTimeline;
 
 // OG CODE BELOW
 // // import React, { useState, useEffect } from "react";

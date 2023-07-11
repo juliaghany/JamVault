@@ -12,6 +12,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [mediaFiles, setMediaFiles] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
+    const [submitStatus, setSubmitStatus] = useState('');
 
     const { data: concertData, error: queryError, loading: queryLoading } = useQuery(CONCERT_BY_DESCRIPTION, {
         variables: { description: concert.description },
@@ -63,7 +64,8 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     
         try {
             setIsSubmitting(true);
-    
+            setSubmitStatus('loading');
+
             const uploadedUrls = await Promise.all(
                 mediaFiles.map(async mediaFile => {
                     const formData = new FormData();
@@ -84,18 +86,19 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
             console.log("concertId:", concertId);
             await addPost({ variables: { concertId, review, media: uploadedUrls } });
     
-            onClose();
+            setSubmitStatus('success');
             setError('');
         } catch (error) {
             console.log(error);
             setError('An error occurred. Please try again.');
+            setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
         }
-    };      
+    };       
 
     return (
-        <Modal show={isModalOpen} onHide={onClose}>
+        <Modal show={isModalOpen} onHide={() => { onClose(); setSubmitStatus(''); }}>
             <Modal.Header closeButton>
                 <Modal.Title style={{ fontWeight: "bold" }}>Share your experience</Modal.Title>
             </Modal.Header>
@@ -132,6 +135,9 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
                     <Button variant="dark" type="submit" style={{ width: '100%', marginTop: '1rem' }}>Post</Button>
                     {isSubmitting && <p>Loading...</p>}
                     {error && <p>{error}</p>}
+                    {submitStatus === 'loading' && <p>Submitting...</p>}
+                    {submitStatus === 'success' && <p>Your post was successfully submitted!</p>}
+                    {submitStatus === 'error' && <p>An error occurred while submitting your post. Please try again.</p>}
                 </Form>
             </Modal.Body>
         </Modal>

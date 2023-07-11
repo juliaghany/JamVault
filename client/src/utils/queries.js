@@ -2,25 +2,26 @@ import { gql } from '@apollo/client'
 
 export const QUERY_USER_POSTS = gql`
 query userPosts($userId: ID!) {
-    Post(userId: $userId) {
-        review
-        media
-        concert
-        votes
-        createdAt
-        User {
-            username
-        }
-        Concert {
-          description
-        }
+    userPosts(userId: $userId) {
+      _id
+      review
+      media
+      votes
+      user {
+        _id
+        username
+      }
+      concert {
+        _id
+        description
+      }
     }
-}
-`;
+}`;
+  
 
 export const QUERY_CONCERT_POSTS = gql`
-query getConcertPosts ($concertId: ID!) {
-    Post (concertId: $concertId) {
+query getConcertPosts ($concertDescription: description!) {
+    Post (concertDescription: $concertDescription) {
         review
         media
         concert
