@@ -20,24 +20,31 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
 
     const [addConcert] = useMutation(ADD_CONCERT);
     const [addPost] = useMutation(ADD_POST);
+    const [concertId, setConcertId] = useState(null);
 
     useEffect(() => {
-      if (queryLoading) {
+    if (queryLoading) {
         console.log('Query is loading');
-      } else if (queryError) {
+    } else if (queryError) {
         console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
-      } else {
+    } else {
         console.log('Query completed', concertData);
         if (!concertData?.concertByDescription) {
-          console.log('Concert not found in database, adding it now', concert);
-          console.log("***** concert info after not found ****")
-          console.log(concert)
+        console.log('Concert not found in database, adding it now', concert);
+        console.log("***** concert info after not found ****")
+        console.log(concert)
             addConcert({ variables: concert })
-              .then(() => console.log('Concert successfully added to database'))
-              .catch((err) => console.error('Error adding concert to database:', err));
-          }  
+            .then(({data}) => {
+                console.log('Concert successfully added to database');
+                setConcertId(data.addConcert._id);
+            })
+            .catch((err) => console.error('Error adding concert to database:', err));
+        } else {
+            setConcertId(concertData?.concertByDescription?._id);
         }
-      }, [concertData, queryLoading, queryError, addConcert, concert]);      
+        }
+    }, [concertData, queryLoading, queryError, addConcert, concert]);
+      
 
     const handleMedia = (mediaFile) => {
         setMediaFiles(oldMediaFiles => [...oldMediaFiles, mediaFile]);
@@ -45,52 +52,47 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         console.log({review,mediaFiles})
         console.log(window.lastUploadingFile)
-      
+    
         if (review.length===0 || !window.lastUploadingFile) {
-          setError('Please enter all required fields.');
-          return;
+            setError('Please enter all required fields.');
+            return;
         }
-      
+    
         try {
-          setIsSubmitting(true);
-      
-          let { data: newConcertData } = await addConcert({ variables: concert });
-          let concertId = newConcertData?.addConcert?._id;
-
-          console.log('New concert:', newConcertData?.addConcert);
-          console.log('New concert ID:', concertId);
-      
-          const uploadedUrls = await Promise.all(
-            mediaFiles.map(async mediaFile => {
-              const formData = new FormData();
-              formData.append('media', mediaFile);
-      
-              const response = await fetch("/uploads", {
-                method:"POST",
-                body: formData
-              });
-      
-              if (!response.ok) throw new Error('Upload failed');
-      
-              const data = await response.json();
-              return data.url;
-            })
-          );
-      
-          await addPost({ variables: { post: { concertId, review, media: uploadedUrls } } });
-      
-          onClose();
-          setError('');
+            setIsSubmitting(true);
+    
+            const uploadedUrls = await Promise.all(
+                mediaFiles.map(async mediaFile => {
+                    const formData = new FormData();
+                    formData.append('media', mediaFile);
+    
+                    const response = await fetch("/uploads", {
+                        method:"POST",
+                        body: formData
+                    });
+    
+                    if (!response.ok) throw new Error('Upload failed');
+    
+                    const data = await response.json();
+                    return data.url;
+                })
+            );
+            
+            console.log("concertId:", concertId);
+            await addPost({ variables: { concertId, review, media: uploadedUrls } });
+    
+            onClose();
+            setError('');
         } catch (error) {
-          console.log(error);
-          setError('An error occurred. Please try again.');
+            console.log(error);
+            setError('An error occurred. Please try again.');
         } finally {
-          setIsSubmitting(false);
+            setIsSubmitting(false);
         }
-      };      
+    };      
 
     return (
         <Modal show={isModalOpen} onHide={onClose}>
