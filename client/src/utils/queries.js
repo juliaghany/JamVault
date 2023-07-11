@@ -5,8 +5,7 @@ query userPosts($userId: ID!) {
     Post(userId: $userId) {
         title
         content
-        photos
-        videos
+        media
         concert
         votes
         createdAt

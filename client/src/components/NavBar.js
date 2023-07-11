@@ -68,7 +68,7 @@ function NavBar({ handlePageChange }) {
                     <Nav.Link onClick={handleTimelineClick} style={styles.navLink} href='#timeline'>Timeline</Nav.Link>
                     <div>
                         {AuthService.loggedIn() ? (
-                            <Nav.Link onClick={logout} style={styles.navLink}>Logout</Nav.Link>
+                            <Nav.Link onClick={(event)=> { logout(event) }} style={styles.navLink}>Logout</Nav.Link>
                         ) : (
                                 <Nav.Link onClick={() => handlePageChange('Login')} style={styles.navLink} href='#login'>Login</Nav.Link>
                         )}

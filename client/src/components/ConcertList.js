@@ -7,7 +7,7 @@ const ConcertList = ({ results }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelectConcert = (concert) => {
-    console.log('Selected concert:', concert);
+    //setSelectedConcert(concert);
     setSelectedConcert({ ...concert, description: concert.description });
     setIsModalOpen(true);
   };
@@ -22,7 +22,7 @@ const ConcertList = ({ results }) => {
         const date = new Date(concert.date);
         const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
         return (
-          <Card style={{ width: '18rem', margin: '1rem' }} key={index}>
+          <Card key={"concert-card-"+index} style={{ width: '18rem', margin: '1rem' }}>
             <Card.Img variant="top" src={concert.image} />
             <Card.Body>
               <Card.Title>{`${concert.venue}`}</Card.Title>
