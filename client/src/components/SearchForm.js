@@ -11,6 +11,7 @@ const SearchForm = ({ setResults }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
+    setError("");
 
     fetch(`/api/search?artist=${encodeURIComponent(artist)}&minDate=${encodeURIComponent(minDate)}&maxDate=${encodeURIComponent(maxDate)}`)
       .then((response) => {
@@ -31,9 +32,14 @@ const SearchForm = ({ setResults }) => {
         }));
         console.log('Fetched concerts:', concerts);
         setResults(concerts);
+
+        if (concerts.length === 0) {
+          throw new Error("No concerts found, please try expanding date range.");
+        }
       })
       .catch((error) => {
-        setError("An error occurred while fetching data.");
+        console.log('Error occured:', error)
+        setError("No concerts found, please try expanding date range.");
       })
       .finally(() => {
         setIsLoading(false);
@@ -41,14 +47,14 @@ const SearchForm = ({ setResults }) => {
   };
 
   return (
-    <div className="container-fluid py-5" style={{ marginTop: '240px' }}>
+    <div className="container-fluid py-5" style={{ marginTop: '215px' }}>
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="d-flex flex-column flex-lg-row">
             <div className="mr-lg-3 mb-3 mb-lg-0" style={{ flex: '1', fontSize: '40px', margin: '5px', fontFamily: 'Raleway, sans- serif', }}>
               Discover unforgettable concert experiences and share your own; search for an artist and enter the start and end dates to find concerts within that period
             </div>
-            <form className="text-center bg-white p-4 shadow" onSubmit={handleSubmit}>
+            <form className="text-center bg-white p-4 shadow" style={{ width: '370px'}} onSubmit={handleSubmit}>
               <div className="form-group mb-4">
                 <input className="form-control form-control-lg mb-3" type="text" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist" />
               </div>
@@ -69,6 +75,7 @@ const SearchForm = ({ setResults }) => {
             {/* {error && <div>Error: {error}</div>}
    */}
           </div>
+          
         </div>
       </div>
     </div>

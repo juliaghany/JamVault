@@ -25,12 +25,12 @@ const ConcertList = ({ results }) => {
           <Card style={{ width: '18rem', margin: '1rem' }} key={index}>
             <Card.Img variant="top" src={concert.image} />
             <Card.Body>
-              <Card.Title>{`${concert.artist} at ${concert.venue}`}</Card.Title>
+              <Card.Title>{`${concert.venue}`}</Card.Title>
               <Card.Text>
                 {formattedDate} <br />
                 {concert.city}, {concert.country}
               </Card.Text>
-              <Button variant="primary" onClick={() => handleSelectConcert(concert)}>Share Experience</Button>
+              <Button variant="dark" onClick={() => handleSelectConcert(concert)} style={{ width: '100%' }}>Share Experience</Button>
             </Card.Body>
           </Card>
         );
