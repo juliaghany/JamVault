@@ -46,8 +46,10 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
         }
     }, [concertData, queryLoading, queryError, addConcert, concert]);
       
+    const randomFunction = (mediaPath) => {console.log("random function", mediaPath)}
 
     const handleMedia = (mediaFile) => {
+        console.log("media file", mediaFile)
         setMediaFiles(oldMediaFiles => [...oldMediaFiles, mediaFile]);
     };
 
@@ -130,7 +132,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
                         />
                     </Form.Group>
 
-                    <MediaUpload onMediaSelected={handleMedia} />
+                    <MediaUpload onMediaSelected={handleMedia} findMediaPath={randomFunction}/>
 
                     <Button variant="dark" type="submit" style={{ width: '100%', marginTop: '1rem' }}>Post</Button>
                     {isSubmitting && <p>Loading...</p>}

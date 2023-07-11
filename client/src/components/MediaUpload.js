@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 
-const MediaUpload = () => {
+const MediaUpload = (props) => {
 
     const [media, setMedia] = useState('')
     const [mediaName, setMediaName] = useState('Choose File')
@@ -32,6 +32,9 @@ const MediaUpload = () => {
 
           if(response.ok) {
             console.log("successful")
+            var tony = await response.json()
+            props.findMediaPath(tony)
+            console.log("JINGLE BELLS", tony)
           } else {
             //debugger;
             console.error("unsuccessful")

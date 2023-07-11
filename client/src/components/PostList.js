@@ -12,7 +12,8 @@ const PostList = ({ posts }) => {
             posts.map((post) => (
                 <div key={post._id} className="card mb-3">
                     <p>Posted by: {post.user.username}</p>
-                    <img src={post.media} alt={post.title}/>
+                    <img src={post.media} alt={post.review}/>
+                    <p>{post.review}</p>
                     <p><small>{post.createdAt}</small></p>
                 </div>
             ))
