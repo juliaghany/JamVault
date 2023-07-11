@@ -55,7 +55,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     
         console.log({review,mediaFiles})
         console.log(window.lastUploadingFile)
-    // is this the line of code we need to modify so that the user can make a post without a photo? 
+    // is this the line of code we need to modify so that the user can make a post without a photo?
         if (review.length===0 || !window.lastUploadingFile) {
             setError('Please enter all required fields.');
             return;
