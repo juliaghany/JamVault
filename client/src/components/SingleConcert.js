@@ -1,6 +1,6 @@
 // SingleConcert.js
 import React from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useParams } from "@apollo/client";
 import { QUERY_CONCERT_POSTS } from "../utils/queries";
 
 const SingleConcert = () => {

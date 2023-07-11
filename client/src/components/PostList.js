@@ -1,6 +1,6 @@
 import React from "react"
 
-const PostList = ({ posts, media }) => {
+const PostList = ({ posts }) => {
     if (!posts.length) {
         return <h3>You have no posts</h3>
     }
