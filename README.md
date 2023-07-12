@@ -32,18 +32,12 @@ Our motivation behind creating JamVault stemmed from our passion for live music 
 - JSON Web Token
 - Express Fileupload
 
-## Credits
-
-- Zach Berger:
-- Zainab Dabbagh: 
-- Julia Hany: 
-
 ## GitHub profiles: 
-- [Zainab](https://github.com/ZeeDabbagh)
-- [Julia](https://github.com/juliaghany)
-- [Zach](https://github.com/berman619)
+- [Zainab Dabbagh](https://github.com/ZeeDabbagh)
+- [Julia Hany](https://github.com/juliaghany)
+- [Zach Berger](https://github.com/berman619)
 
 ## LinkedIn Profiles: 
-- [Zainab]()
-- [Julia]()
-- [Zach]()
+- [Zainab Dabbagh](https://www.linkedin.com/in/zaldabbagh/)
+- [Julia Hany](https://www.linkedin.com/in/julia-hany-41224626b/)
+- [Zach Berger](https://www.linkedin.com/in/zachhberger/)

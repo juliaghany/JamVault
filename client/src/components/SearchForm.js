@@ -51,10 +51,10 @@ const SearchForm = ({ setResults }) => {
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="d-flex flex-column flex-lg-row">
-            <div className="mr-lg-3 mb-3 mb-lg-0" style={{ flex: '1', fontSize: '40px', margin: '5px', fontFamily: 'Raleway, sans- serif', }}>
+            <div className="mr-lg-3 mb-3 mb-lg-0" style={{ flex: '1', fontSize: '40px', margin: '2px', fontFamily: 'Raleway, sans- serif', }}>
               Discover unforgettable concert experiences and share your own; search for an artist and enter the start and end dates to find concerts within that period
             </div>
-            <form className="text-center bg-white p-4 shadow" style={{ width: '370px'}} onSubmit={handleSubmit}>
+            <form className="text-center bg-white p-4 shadow" onSubmit={handleSubmit}>
               <div className="form-group mb-4">
                 <input className="form-control form-control-lg mb-3" type="text" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Artist" />
               </div>
