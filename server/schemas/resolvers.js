@@ -9,8 +9,9 @@ const resolvers = {
     users: async () => {
       return User.find({});
     },
-    concerts: async () => {
-      return Concert.find({});
+    concerts: async (_, {postId}) => {
+      const params = postId? { postId }: {};
+      return Concert.find(params)
     },
     posts: async () => {
       return Post.find({});

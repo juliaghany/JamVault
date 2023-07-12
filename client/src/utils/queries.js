@@ -50,3 +50,17 @@ export const CONCERT_BY_DESCRIPTION = gql`
     }
   }
 `;
+
+export const QUERY_CONCERTS = gql`
+query getConcerts {
+  concerts {
+    _id
+      description
+      date
+      artist
+      venue
+      city
+      country
+      image
+  }
+}`
