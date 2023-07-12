@@ -11,41 +11,38 @@ const MediaUpload = (props) => {
     }, [media, mediaName])
 
     const handleMedia = (e) => {
-        setMedia(e.target.files[0])
-        setMediaName(e.target.files[0].name)
-        //debugger;
-        handleSubmit(e);
-        //handleSubmit();
+        const selectedMedia = e.target.files[0];
+        setMedia(selectedMedia)
+        setMediaName(selectedMedia.name)
+        handleSubmit(selectedMedia);
     }
-
-    const handleSubmit = async (e) => {
-        const formData = new FormData()
-        //formData.append('media', media)
-        formData.append('media', e.target.files[0])
-        window.lastUploadingFile = e.target.files[0] //need to stop propogation 
-//get the e.target in postform and check its files 
+    
+    const handleSubmit = async (mediaFile) => {
+        const formData = new FormData();
+        formData.append('media', mediaFile);
+    
         try {
-          const response = await fetch("/uploads", {
-            method:"POST",
-            body: formData
-          })
-
-          if(response.ok) {
-            console.log("successful")
-            var tony = await response.json()
-            props.findMediaPath(tony)
-            console.log("JINGLE BELLS", tony)
-          } else {
-            //debugger;
-            console.error("unsuccessful")
-          }
-
-
-        } catch(error) {
-          console.log("Ran here MediaUpload error caught")
-          console.log(error)
+            const response = await fetch("/uploads", {
+                method: "POST",
+                body: formData
+            });
+    
+            if (response.ok) {
+                console.log("Upload successful");
+                var result = await response.json();
+                console.log("Server response: ", result); // Log the entire result object
+                let fileUrl = 'http://localhost:3001' + result.filePath;
+                props.findMediaPath(result);
+                props.onMediaSelected(fileUrl);
+                console.log("File URL: ", fileUrl);
+            } else {
+                console.error("Upload unsuccessful");
+            }
+    
+        } catch (error) {
+            console.log("MediaUpload error caught");
+            console.log(error);
         }
-
     }
 
   return (

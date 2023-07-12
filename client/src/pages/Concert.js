@@ -12,4 +12,3 @@
 // useQuery(//e can use the id of the selected conert to then fetch that specific concert and all associated posts)
 // _id, artist, venue, date, description, posts { _id, user, postText}
 // Create a component for every post in that conert, and have it receive the posts information (object) as props
-
