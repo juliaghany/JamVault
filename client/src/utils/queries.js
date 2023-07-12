@@ -53,8 +53,8 @@ export const CONCERT_BY_DESCRIPTION = gql`
 
 export const QUERY_CONCERTS = gql`
 query getConcerts {
-  concerts {
-    _id
+    concerts {
+      _id
       description
       date
       artist
@@ -62,5 +62,13 @@ query getConcerts {
       city
       country
       image
-  }
-}`
+      posts {
+        _id
+        review
+        media
+        user {
+          username
+        }
+      }
+    }
+  }`;
