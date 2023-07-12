@@ -1,6 +1,5 @@
 import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import testImage from '../images/linkedInheader.jpg'
 import { Card } from 'react-bootstrap'
 
 const styles = {
@@ -12,10 +11,9 @@ const styles = {
 
 const PostList = ({ posts }) => {
     if (!posts.length) {
-        return <h3 style={{ textAlign: 'center', fontFamily: 'Raleway, sans- serif', marginBottom: '50px' }}>Oh all the <span style={styles.span}>places</span> you've yet to be..</h3>
+        return <h3 style={{ textAlign: 'center', fontFamily: 'Raleway, sans- serif', marginTop: '175px' }}>Oh all the <span style={styles.span}>places</span> you've yet to be..</h3>
     }
 
-    console.log(posts);
 
     return (
         <div style={{ marginTop: '175px' }}>
