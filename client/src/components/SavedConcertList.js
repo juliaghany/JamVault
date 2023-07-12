@@ -36,7 +36,7 @@ const SavedConcertList = ({ concerts }) => {
         })}
         {selectedConcert && <PostModal show={showModal} handleClose={handleCloseModal} concert={selectedConcert} />}
     </div>
-);
+  );
 };
 
 export default SavedConcertList;
