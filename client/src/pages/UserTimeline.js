@@ -23,6 +23,7 @@ const UserTimeline = () => {
   console.log("Fetched data:", data);  
 
   const posts = data?.userPosts || [];
+  const concerts = data?.concerts || [];
 
   return (
     <>
@@ -30,7 +31,7 @@ const UserTimeline = () => {
         {loading ? (
           <div>loading...</div>
         ) : (
-          <PostList posts={posts} title="Your Posts" />
+          <PostList posts={posts} concerts={concerts} title="Your Posts" />
         )}
       </Card>
     </>

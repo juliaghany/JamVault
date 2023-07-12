@@ -14,6 +14,9 @@ query userPosts($userId: ID!) {
       concert {
         _id
         description
+        date
+        artist
+        venue
       }
     }
 }`;
