@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-// import PostForm from './PostForm';
 import { Card, Button } from 'react-bootstrap';
+import PostModal from './PostModal';
 
 const SavedConcertList = ({ concerts }) => {
   const [selectedConcert, setSelectedConcert] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSelectConcert = (concert) => {
-    //setSelectedConcert(concert);
-    setSelectedConcert({ ...concert, concertId: concert._id });
+    setSelectedConcert(concert);
+    setShowModal(true);
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="d-flex flex-wrap justify-content-center" style={{ marginBottom: '60px'}}>
@@ -26,17 +30,11 @@ const SavedConcertList = ({ concerts }) => {
                             {concert.city}, {concert.country}
                         </Card.Text>
                         <Button variant="dark" onClick={() => handleSelectConcert(concert)} style={{ width: '100%' }}>See Posts!</Button>
-                        {concert.posts.map((post, postIndex) => (
-                            <div key={"post-"+postIndex}>
-                                <h3>{post.user.username}</h3>
-                                <p>{post.review}</p>
-                            </div>
-                        ))}
                     </Card.Body>
                 </Card>
             );
         })}
-        {/* {selectedConcert && <PostForm concert={selectedConcert} onClose={handleCloseModal} isModalOpen={isModalOpen} />} */}
+        {selectedConcert && <PostModal show={showModal} handleClose={handleCloseModal} concert={selectedConcert} />}
     </div>
 );
 };

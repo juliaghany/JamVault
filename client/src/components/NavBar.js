@@ -4,9 +4,6 @@ import React from 'react';
 import AuthService from '../utils/auth';
 import { Nav, Navbar } from 'react-bootstrap';
 import '../styles/Navbar.css'
-import Concert from '../pages/Concert';
-import Timeline from '../pages/UserTimeline';
-import Home from '../pages/Home';
 
 const styles = {
     nav: {
@@ -64,7 +61,7 @@ function NavBar({ handlePageChange }) {
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto custom-link">
                     <Nav.Link onClick={() => handlePageChange('Home')} style={styles.navLink} href='#home'>Home</Nav.Link>
-                    <Nav.Link onClick={handleConcertClick} style={styles.navLink} href='#concert'>Concert</Nav.Link>
+                    <Nav.Link onClick={handleConcertClick} style={styles.navLink} href='#concert'>The Vault</Nav.Link>
                     <Nav.Link onClick={handleTimelineClick} style={styles.navLink} href='#timeline'>Timeline</Nav.Link>
                     <div>
                         {AuthService.loggedIn() ? (

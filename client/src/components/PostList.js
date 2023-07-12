@@ -18,7 +18,7 @@ const PostList = ({ posts }) => {
     return (
         <div style={{ marginTop: '175px' }}>
             <h3 style={{ textAlign: 'center', fontFamily: 'Raleway, sans-serif', marginBottom: '50px' }}>
-                Oh all the <span style={styles.span}>places</span> you've been..
+            Oh, the <span style={styles.span}>Places</span> You've Been...
             </h3>
             <div className="d-flex flex-wrap justify-content-center" style={{ marginBottom: '60px' }}>
                 {posts.map((post) => {
