@@ -48,18 +48,3 @@ const PostList = ({ posts }) => {
 }
 
 export default PostList;
-
-  // <div>
-        //     <h3>Oh all the places you've been</h3>
-        //     {posts &&
-        //     posts.map((post) => (
-        //         <div key={post._id} className="card mb-3">
-        //             <p>Posted by: {post.user.username}</p>
-        //             {/* <img src={post.media} alt={post.review}/> */}
-        //             <img src={testImage} style={{ height: '100px', width: '100px'}} />
-        //             <p>{post.review}</p>
-        //             <p><small>{post.createdAt}</small></p>
-        //         </div>
-        //     ))
-        //     }
-        // </div>
