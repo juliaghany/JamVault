@@ -22,6 +22,9 @@ const resolvers = {
     concertPosts: async( _,{ concertId }) => {
         return Post.findOne({ _id: concertId });
     },
+    concertByDescription: async (_, { description }) => {
+      return Concert.findOne({ description });
+  },
     userPosts: async (parent, { userId }, context) => {
       console.log("userId: ", userId);
     
