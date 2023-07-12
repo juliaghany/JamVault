@@ -11,7 +11,7 @@ const styles = {
 
 const PostList = ({ posts }) => {
     if (!posts.length) {
-        return <h3 style={{ textAlign: 'center', fontFamily: 'Raleway, sans- serif', marginTop: '175px' }}>Oh all the <span style={styles.span}>places</span> you've yet to be..</h3>
+        return <h3 style={{ textAlign: 'center', fontFamily: 'Raleway, sans- serif', marginTop: '175px' }}>Oh the <span style={styles.span}>places</span> you've yet to be..</h3>
     }
 
 
@@ -48,18 +48,3 @@ const PostList = ({ posts }) => {
 }
 
 export default PostList;
-
-  // <div>
-        //     <h3>Oh all the places you've been</h3>
-        //     {posts &&
-        //     posts.map((post) => (
-        //         <div key={post._id} className="card mb-3">
-        //             <p>Posted by: {post.user.username}</p>
-        //             {/* <img src={post.media} alt={post.review}/> */}
-        //             <img src={testImage} style={{ height: '100px', width: '100px'}} />
-        //             <p>{post.review}</p>
-        //             <p><small>{post.createdAt}</small></p>
-        //         </div>
-        //     ))
-        //     }
-        // </div>
