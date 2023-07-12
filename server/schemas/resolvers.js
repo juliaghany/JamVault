@@ -71,6 +71,15 @@ const resolvers = {
           console.error('Error creating post:', err);
           throw new Error('Failed to create post');
         }
+
+        await Concert.findOneAndUpdate(
+          {_id : concertId},
+          { $addToSet: { posts: newPost._id}}
+        )
+
+        await User.findOneAndUpdate(
+          {"_id":user.data._id},{ $addToSet: { posts: newPost._id}}
+        )
       
         return newPost;
       },          
