@@ -34,7 +34,7 @@ const PostList = ({ posts }) => {
 
                     return (
                         <Card key={post._id} style={{ width: '18rem', margin: '1rem' }}>
-                            <Card.Img variant="top" src={testImage} alt={post.review} />
+                            <Card.Img variant="top" src={post.media} alt={post.review} />
                             <Card.Body>
                                 <Card.Title style={{ textAlign: 'center' }}><span style={{ fontWeight: 'bold' }}>{artist}</span> </Card.Title>
                                 <Card.Text style={{ textAlign: 'center' }}>{venue} on {formattedDate}</Card.Text>
