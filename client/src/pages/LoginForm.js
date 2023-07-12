@@ -44,11 +44,6 @@ const LoginForm = ({ handlePageChange }) => {
             console.error(e)
         }
 
-        setUserFormData({
-            email: '',
-            password: ''
-        })
-
         // const form = event.currentTarget;
         // if (form.checkValidity() === false) {
         //     event.preventDefault();

@@ -24,11 +24,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [concertId, setConcertId] = useState(null);
 
     useEffect(() => {
-        if (queryLoading) {
-            console.log('Query is loading');
-        } else if (queryError) {
-            console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
-        } else {
+        if (!queryLoading && !queryError) {
             console.log('Query completed', concertData);
             if (!concertData?.concertByDescription) {
                 console.log('Concert not found in database, adding it now', concert);
@@ -44,51 +40,33 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
                 setConcertId(concertData?.concertByDescription?._id);
             }
         }
-    }, [queryLoading, queryError, concertData, addConcert, concert]);    
+    }, [queryLoading, queryError, concertData, addConcert, concert]);
       
     const randomFunction = (mediaPath) => {console.log("random function", mediaPath)}
 
     const handleMedia = (mediaFile) => {
         console.log("media file", mediaFile)
-        setMediaFiles(oldMediaFiles => [...oldMediaFiles, mediaFile]);
-    };
+        setMediaFiles(mediaFile);
+    };    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
     
-        console.log({review,mediaFiles})
-        console.log(window.lastUploadingFile)
-    // is this the line of code we need to modify so that the user can make a post without a photo?
-        if (review.length===0 || !window.lastUploadingFile) {
-            setError('Please enter all required fields.');
+        console.log({review, mediaFiles})
+        if (review.length === 0) {
+            setError('Please enter a review.');
             return;
         }
     
         try {
             setIsSubmitting(true);
             setSubmitStatus('loading');
-
-            const uploadedUrls = await Promise.all(
-                mediaFiles.map(async mediaFile => {
-                    const formData = new FormData();
-                    formData.append('media', mediaFile);
     
-                    const response = await fetch("/uploads", {
-                        method:"POST",
-                        body: formData
-                    });
-    
-                    if (!response.ok) throw new Error('Upload failed');
-    
-                    const data = await response.json();
-                    return data.url;
-                })
-            );
-            
             console.log("concertId:", concertId);
-            await addPost({ variables: { concertId, review, media: uploadedUrls } });
+            await addPost({ variables: { concertId, review, media: mediaFiles } });
     
             setSubmitStatus('success');
+            setMediaFiles('');
             setError('');
         } catch (error) {
             console.log(error);
@@ -97,7 +75,7 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
         } finally {
             setIsSubmitting(false);
         }
-    };       
+    };         
 
     return (
         <Modal show={isModalOpen} onHide={() => { onClose(); setSubmitStatus(''); }}>
