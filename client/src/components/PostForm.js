@@ -24,27 +24,27 @@ const PostForm = ({ concert, onClose, isModalOpen }) => {
     const [concertId, setConcertId] = useState(null);
 
     useEffect(() => {
-    if (queryLoading) {
-        console.log('Query is loading');
-    } else if (queryError) {
-        console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
-    } else {
-        console.log('Query completed', concertData);
-        if (!concertData?.concertByDescription) {
-        console.log('Concert not found in database, adding it now', concert);
-        console.log("***** concert info after not found ****")
-        console.log(concert)
-            addConcert({ variables: concert })
-            .then(({data}) => {
-                console.log('Concert successfully added to database');
-                setConcertId(data.addConcert._id);
-            })
-            .catch((err) => console.error('Error adding concert to database:', err));
+        if (queryLoading) {
+            console.log('Query is loading');
+        } else if (queryError) {
+            console.error('Error from CONCERT_BY_DESCRIPTION query:', queryError);
         } else {
-            setConcertId(concertData?.concertByDescription?._id);
+            console.log('Query completed', concertData);
+            if (!concertData?.concertByDescription) {
+                console.log('Concert not found in database, adding it now', concert);
+                console.log("***** concert info after not found ****")
+                console.log(concert)
+                addConcert({ variables: { ...concert } })
+                    .then(({ data }) => {
+                        console.log('Concert successfully added to database');
+                        setConcertId(data.addConcert._id);
+                    })
+                    .catch((err) => console.error('Error adding concert to database:', err));
+            } else {
+                setConcertId(concertData?.concertByDescription?._id);
+            }
         }
-        }
-    }, [concertData, queryLoading, queryError, addConcert, concert]);
+    }, [queryLoading, queryError, concertData, addConcert, concert]);    
       
     const randomFunction = (mediaPath) => {console.log("random function", mediaPath)}
 
