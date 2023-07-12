@@ -1,4 +1,3 @@
-// // not yet finished 
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
@@ -43,30 +42,6 @@ const LoginForm = ({ handlePageChange }) => {
         } catch(e) { 
             console.error(e)
         }
-
-        // const form = event.currentTarget;
-        // if (form.checkValidity() === false) {
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        // }
-
-        // try {
-        //     const { data } = await login({
-        //         variables: { ...userFormData },
-        //     });
-
-        //     Auth.login(data.login.token);
-        // } catch (err) {
-        //     console.log(err);
-        //     setShowAlert(true);
-        // }
-
-        // setUserFormData({
-        //     username: '',
-        //     email: '',
-        //     password: '',
-        // });
-        // setValidated(true);
     };
 
     return (

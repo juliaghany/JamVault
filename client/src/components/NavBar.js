@@ -1,4 +1,3 @@
-// NavBar.js 
 // Referring to Activity 24 -> src -> components -> NavTabs.js
 import React from 'react';
 import AuthService from '../utils/auth';

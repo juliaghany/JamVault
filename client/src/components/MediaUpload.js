@@ -7,7 +7,6 @@ const MediaUpload = (props) => {
 
     useEffect(()=>{
       console.log({media,mediaName})
-      //debugger;
     }, [media, mediaName])
 
     const handleMedia = (e) => {
@@ -30,7 +29,7 @@ const MediaUpload = (props) => {
             if (response.ok) {
                 console.log("Upload successful");
                 var result = await response.json();
-                console.log("Server response: ", result); // Log the entire result object
+                console.log("Server response: ", result); 
                 let fileUrl = 'http://localhost:3001' + result.filePath;
                 props.findMediaPath(result);
                 props.onMediaSelected(fileUrl);
@@ -55,7 +54,6 @@ const MediaUpload = (props) => {
           </label>
         </div>
 
-        {/*<button type='submit' className='btn btn-primary btn-block mt-4'> Upload</button>*/}
       </form>
     </>
   );
