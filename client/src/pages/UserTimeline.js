@@ -15,10 +15,14 @@ const UserTimeline = () => {
   console.log("loading: ", loading); 
   console.log("error: ", error); 
   console.log("data: ", data);
+
+  // if (!userId.length) {
+  //   return <h3>no posts yet</h3>
+  // }
   
   if (error) {
     console.error("GraphQL error occurred while fetching user posts:", error);
-  }
+  } 
   
   console.log("Fetched data:", data);  
 

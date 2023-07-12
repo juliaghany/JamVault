@@ -43,7 +43,7 @@ const typeDefs = gql`
 
     type Query {
         users: [User]
-        concerts: [Concert]
+        concerts(postId: ID!): [Concert]
         posts: [Post]
         userPosts(userId: ID!): [Post]
         concertPosts(concertDescription: String!): [Post]
