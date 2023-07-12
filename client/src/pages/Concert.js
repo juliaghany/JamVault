@@ -33,15 +33,15 @@ const Concert = () => {
 
   return (
     <>
-      <Card>
-        {loading ? (
-          <div>loading...</div>
-        ) : (
-          <SavedConcertList concerts={concerts} title="Saved Concerts" />
-        )}
-      </Card>
+        <Card>
+            {loading ? (
+                <div>loading...</div>
+            ) : (
+                <SavedConcertList concerts={concerts} title="Saved Concerts" />
+            )}
+        </Card>
     </>
-  );
+);
 };
 
 export default Concert;

@@ -9,10 +9,13 @@ const resolvers = {
     users: async () => {
       return User.find({});
     },
-    concerts: async (_, {postId}) => {
-      const params = postId? { postId }: {};
-      return Concert.find(params)
-    },
+    concerts: async () => {
+      const concerts = await Concert.find({ $where: function () { return this.posts.length > 0; } }).populate('posts');
+      return concerts.map(concert => ({
+        ...concert._doc,
+        date: new Date(concert.date).toISOString(),
+      }));
+    },   
     posts: async () => {
       return Post.find({});
     },

@@ -14,7 +14,7 @@ const typeDefs = gql`
         user: User
       }
 
-    type Concert {
+      type Concert {
         _id: ID!
         date: String!
         artist: String!
@@ -24,7 +24,7 @@ const typeDefs = gql`
         image: String!
         posts: [Post]
         description: String!
-    }    
+    }
 
     type Post {
         _id: ID!
@@ -43,7 +43,7 @@ const typeDefs = gql`
 
     type Query {
         users: [User]
-        concerts(postId: ID!): [Concert]
+        concerts: [Concert]
         posts: [Post]
         userPosts(userId: ID!): [Post]
         concertPosts(concertDescription: String!): [Post]
