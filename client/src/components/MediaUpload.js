@@ -22,7 +22,7 @@ const MediaUpload = (props) => {
         formData.append('media', mediaFile);
     
         try {
-            const response = await fetch(`${__dirname}/../client/build/uploads/${file.name}`, {
+            const response = await fetch("/uploads", {
                 method: "POST",
                 body: formData
             });
