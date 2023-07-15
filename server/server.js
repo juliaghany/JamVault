@@ -47,7 +47,7 @@ app.post('/uploads', (req, res) => {
 
     const file =req.files.media
 
-    file.mv(`${__dirname}/../client/build/uploads/${file.name}`, err => {
+    file.mv(`https://jamvault-3a4f37943c6d.herokuapp.com/uploads/${file.name}`, err => {
         if(err) {
             console.error(err)
             return res.status(500).send(err)
