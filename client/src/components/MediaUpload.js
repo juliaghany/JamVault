@@ -28,7 +28,7 @@ const MediaUpload = (props) => {
             });
     
             if (response.ok) {
-                console.log("Upload successful");
+                console.log("Upload was successful");
                 var result = await response.json();
                 console.log("Server response: ", result); // Log the entire result object
                 let fileUrl = 'https://jamvault-3a4f37943c6d.herokuapp.com/' + result.filePath;
@@ -36,7 +36,7 @@ const MediaUpload = (props) => {
                 props.onMediaSelected(fileUrl);
                 console.log("File URL: ", fileUrl);
             } else {
-                console.error("Upload unsuccessful");
+                console.error("Upload was unsuccessful");
             }
     
         } catch (error) {
