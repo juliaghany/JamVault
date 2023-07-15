@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express')
+const { ApolloServer } = require('apollo-server-express');
 const fileUpload = require('express-fileupload');
 const path = require("path");
 const searchRouter = require('./routes/searchRoute');
