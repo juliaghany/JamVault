@@ -31,7 +31,7 @@ const MediaUpload = (props) => {
                 console.log("Upload successful");
                 var result = await response.json();
                 console.log("Server response: ", result); // Log the entire result object
-                let fileUrl = 'http://localhost:3001' + result.filePath;
+                let fileUrl = 'https://jamvault-3a4f37943c6d.herokuapp.com/' + result.filePath;
                 props.findMediaPath(result);
                 props.onMediaSelected(fileUrl);
                 console.log("File URL: ", fileUrl);
