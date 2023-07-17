@@ -5,6 +5,10 @@ const fileUpload = require('express-fileupload');
 const path = require("path");
 const searchRouter = require('./routes/searchRoute');
 const { authMiddleware } = require('./utils/auth')
+const fs = require("fs")
+
+// Get S3
+
 
 const { typeDefs, resolvers } = require('./schemas')
 const db = require('./config/connection')
@@ -38,6 +42,14 @@ app.use('/api', searchRouter);
 //upload endpoint
 
 app.post('/uploads', (req, res) => {
+// getSignedURL
+console.log({req_quer:req.query, dirname:__dirname});
+let obj = {req_quer:req.query, dirname:__dirname};
+let string = JSON.stringify(obj);
+
+fs.writeFile(`./logs.txt`, string, (error) => {
+});
+
     if(req.files === null) {
       console.log("**** file upload error server ***")
       console.log(req.files)
