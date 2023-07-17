@@ -1,0 +1,100 @@
+2023-07-17T03:11:52.976434+00:00 app[web.1]: 'x-request-start': '1689563512968',
+2023-07-17T03:11:52.976434+00:00 app[web.1]: 'total-route-time': '0',
+2023-07-17T03:11:52.976434+00:00 app[web.1]: 'content-length': '544'
+2023-07-17T03:11:52.976435+00:00 app[web.1]: },
+2023-07-17T03:11:52.976435+00:00 app[web.1]: [Symbol(kHeadersCount)]: 50,
+2023-07-17T03:11:52.976435+00:00 app[web.1]: [Symbol(kTrailers)]: null,
+2023-07-17T03:11:52.976435+00:00 app[web.1]: [Symbol(kTrailersCount)]: 0
+2023-07-17T03:11:52.976435+00:00 app[web.1]: },
+2023-07-17T03:11:52.976435+00:00 app[web.1]: token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiemVlOTk5QG1haWwuY29tIiwiX2lkIjoiNjRiMzEzNGFlNjU3Y2I3NDIzODUzNGUwIn0sImlhdCI6MTY4OTU2Mjg4MywiZXhwIjoxNjg5NTcwMDgzfQ.xX0V_PlKWjD9I3cuiJmYFbdTsEZI3jVHAoE1E4JgSbQ'
+2023-07-17T03:11:52.976436+00:00 app[web.1]: }
+2023-07-17T03:11:52.977031+00:00 app[web.1]: ***USER IN RESOLVER***:  {
+2023-07-17T03:11:52.977032+00:00 app[web.1]: data: { email: 'zee999@mail.com', _id: '64b3134ae657cb74238534e0' },
+2023-07-17T03:11:52.977032+00:00 app[web.1]: iat: 1689562883,
+2023-07-17T03:11:52.977032+00:00 app[web.1]: exp: 1689570083
+2023-07-17T03:11:52.977032+00:00 app[web.1]: }
+2023-07-17T03:11:53.018449+00:00 heroku[router]: at=info method=POST path="/graphql" host=jamvault-3a4f37943c6d.herokuapp.com request_id=436ae719-7405-44bd-a7fa-fdb508d45856 fwd="35.128.32.121" dyno=web.1 connect=0ms service=48ms status=200 bytes=710 protocol=https
+2023-07-17T03:11:59.536548+00:00 app[web.1]: POST  /uploads
+2023-07-17T03:11:59.536582+00:00 app[web.1]: {}
+2023-07-17T03:11:59.608517+00:00 heroku[router]: at=info method=POST path="/uploads" host=jamvault-3a4f37943c6d.herokuapp.com request_id=d0906423-b26d-4006-ba59-c5b9cd2397e6 fwd="35.128.32.121" dyno=web.1 connect=0ms service=74ms status=500 bytes=344 protocol=https
+2023-07-17T03:11:59.609041+00:00 app[web.1]: [Error: ENOENT: no such file or directory, open 'https://jamvault-3a4f37943c6d.herokuapp.com/uploads/drake.jpeg'] {
+2023-07-17T03:11:59.609042+00:00 app[web.1]: errno: -2,
+2023-07-17T03:11:59.609042+00:00 app[web.1]: code: 'ENOENT',
+2023-07-17T03:11:59.609043+00:00 app[web.1]: syscall: 'open',
+2023-07-17T03:11:59.609043+00:00 app[web.1]: path: 'https://jamvault-3a4f37943c6d.herokuapp.com/uploads/drake.jpeg'
+2023-07-17T03:11:59.609045+00:00 app[web.1]: }
+2023-07-17T03:12:38.636777+00:00 app[api]: Starting process with command `bash` by user dabbagh.zainab@gmail.com
+2023-07-17T03:12:49.694461+00:00 heroku[run.2943]: Awaiting client
+2023-07-17T03:12:49.710255+00:00 heroku[run.2943]: Starting process with command `bash`
+2023-07-17T03:12:49.755652+00:00 heroku[run.2943]: State changed from starting to up
+2023-07-17T03:13:35.627924+00:00 heroku[run.2943]: Process exited with status 127
+2023-07-17T03:13:35.663705+00:00 heroku[run.2943]: State changed from up to complete
+2023-07-17T03:14:14.677923+00:00 app[api]: Starting process with command `bash` by user dabbagh.zainab@gmail.com
+2023-07-17T03:14:31.745758+00:00 heroku[run.6774]: Awaiting client
+2023-07-17T03:14:31.760143+00:00 heroku[run.6774]: Starting process with command `bash`
+2023-07-17T03:14:31.924818+00:00 heroku[run.6774]: State changed from starting to up
+2023-07-17T03:15:09.559975+00:00 app[web.1]: GET  /uploads/drake.jpeg
+2023-07-17T03:15:09.560000+00:00 app[web.1]: {}
+2023-07-17T03:15:09.560935+00:00 heroku[router]: at=info method=GET path="/uploads/drake.jpeg" host=jamvault-3a4f37943c6d.herokuapp.com request_id=7fcedfae-28ea-4b8c-960a-65f1e92ee52a fwd="35.128.32.121" dyno=web.1 connect=0ms service=2ms status=404 bytes=401 protocol=https
+2023-07-17T03:15:14.968797+00:00 heroku[router]: at=info method=GET path="/" host=jamvault-3a4f37943c6d.herokuapp.com request_id=0b33cb43-0df5-494d-98b7-6c542d5a434c fwd="35.128.32.121" dyno=web.1 connect=0ms service=1ms status=304 bytes=237 protocol=https
+2023-07-17T03:15:15.024711+00:00 heroku[router]: at=info method=GET path="/static/js/main.d256363a.js" host=jamvault-3a4f37943c6d.herokuapp.com request_id=0fef815c-0120-41a5-a26a-e02e022b3007 fwd="35.128.32.121" dyno=web.1 connect=0ms service=1ms status=304 bytes=239 protocol=https
+2023-07-17T03:15:15.025743+00:00 heroku[router]: at=info method=GET path="/static/css/main.47ce99a8.css" host=jamvault-3a4f37943c6d.herokuapp.com request_id=dd4b18ef-f8e3-41b6-a0d8-199b2b1988a7 fwd="35.128.32.121" dyno=web.1 connect=0ms service=0ms status=304 bytes=239 protocol=https
+2023-07-17T03:15:15.408523+00:00 heroku[router]: at=info method=GET path="/manifest.json" host=jamvault-3a4f37943c6d.herokuapp.com request_id=4c22b587-c6b6-41c3-86f5-4bc222860366 fwd="35.128.32.121" dyno=web.1 connect=0ms service=1ms status=304 bytes=237 protocol=https
+2023-07-17T03:15:15.460822+00:00 heroku[router]: at=info method=GET path="/logo192.png" host=jamvault-3a4f37943c6d.herokuapp.com request_id=8a6f81ff-3e66-4125-b3f0-9ee1600de843 fwd="35.128.32.121" dyno=web.1 connect=0ms service=1ms status=304 bytes=238 protocol=https
+2023-07-17T03:15:23.710615+00:00 app[web.1]: POST  /graphql
+2023-07-17T03:15:23.710771+00:00 app[web.1]: {
+2023-07-17T03:15:23.710771+00:00 app[web.1]: operationName: 'userPosts',
+2023-07-17T03:15:23.710774+00:00 app[web.1]: variables: { userId: '64b3134ae657cb74238534e0' },
+2023-07-17T03:15:23.710774+00:00 app[web.1]: query: 'query userPosts($userId: ID!) {\n' +
+2023-07-17T03:15:23.710774+00:00 app[web.1]: '  userPosts(userId: $userId) {\n' +
+2023-07-17T03:15:23.710775+00:00 app[web.1]: '    _id\n' +
+2023-07-17T03:15:23.710775+00:00 app[web.1]: '    review\n' +
+2023-07-17T03:15:23.710775+00:00 app[web.1]: '    media\n' +
+2023-07-17T03:15:23.710776+00:00 app[web.1]: '    votes\n' +
+2023-07-17T03:15:23.710776+00:00 app[web.1]: '    user {\n' +
+2023-07-17T03:15:23.710776+00:00 app[web.1]: '      _id\n' +
+2023-07-17T03:15:23.710776+00:00 app[web.1]: '      username\n' +
+2023-07-17T03:15:23.710777+00:00 app[web.1]: '      __typename\n' +
+2023-07-17T03:15:23.710777+00:00 app[web.1]: '    }\n' +
+2023-07-17T03:15:23.710777+00:00 app[web.1]: '    concert {\n' +
+2023-07-17T03:15:23.710777+00:00 app[web.1]: '      _id\n' +
+2023-07-17T03:15:23.710777+00:00 app[web.1]: '      description\n' +
+2023-07-17T03:15:23.710777+00:00 app[web.1]: '      date\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '      artist\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '      venue\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '      __typename\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '    }\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '    __typename\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '  }\n' +
+2023-07-17T03:15:23.710778+00:00 app[web.1]: '}'
+2023-07-17T03:15:23.710778+00:00 app[web.1]: }
+2023-07-17T03:15:23.711275+00:00 app[web.1]: ***USER IN AUTH BEFORE DECODING***:  undefined
+2023-07-17T03:15:23.712523+00:00 app[web.1]: ***USER IN AUTH AFTER DECODING***:  { email: 'zee999@mail.com', _id: '64b3134ae657cb74238534e0' }
+2023-07-17T03:15:23.715986+00:00 app[web.1]: userId:  64b3134ae657cb74238534e0
+2023-07-17T03:15:23.720300+00:00 app[web.1]: posts:  [
+2023-07-17T03:15:23.720300+00:00 app[web.1]: {
+2023-07-17T03:15:23.720300+00:00 app[web.1]: _id: new ObjectId("64b3159e08d4a33371ec947e"),
+2023-07-17T03:15:23.720301+00:00 app[web.1]: review: 'hello there',
+2023-07-17T03:15:23.720301+00:00 app[web.1]: media: [],
+2023-07-17T03:15:23.720301+00:00 app[web.1]: user: new ObjectId("64b3134ae657cb74238534e0"),
+2023-07-17T03:15:23.720301+00:00 app[web.1]: concert: new ObjectId("64b3159408d4a33371ec947c"),
+2023-07-17T03:15:23.720302+00:00 app[web.1]: votes: 0,
+2023-07-17T03:15:23.720302+00:00 app[web.1]: createdAt: 2023-07-15T21:54:38.314Z,
+2023-07-17T03:15:23.720302+00:00 app[web.1]: __v: 0
+2023-07-17T03:15:23.720302+00:00 app[web.1]: },
+2023-07-17T03:15:23.720302+00:00 app[web.1]: {
+2023-07-17T03:15:23.720302+00:00 app[web.1]: _id: new ObjectId("64b4b17824254a047cb00054"),
+2023-07-17T03:15:23.720303+00:00 app[web.1]: review: 'etgrgrdgdrg',
+2023-07-17T03:15:23.720303+00:00 app[web.1]: media: [],
+2023-07-17T03:15:23.720303+00:00 app[web.1]: user: new ObjectId("64b3134ae657cb74238534e0"),
+2023-07-17T03:15:23.720303+00:00 app[web.1]: concert: new ObjectId("64b4b17324254a047cb00052"),
+2023-07-17T03:15:23.720303+00:00 app[web.1]: votes: 0,
+2023-07-17T03:15:23.720303+00:00 app[web.1]: createdAt: 2023-07-17T03:11:52.978Z,
+2023-07-17T03:15:23.720304+00:00 app[web.1]: __v: 0
+2023-07-17T03:15:23.720304+00:00 app[web.1]: }
+2023-07-17T03:15:23.720304+00:00 app[web.1]: ]
+2023-07-17T03:15:23.778338+00:00 heroku[router]: at=info method=POST path="/graphql" host=jamvault-3a4f37943c6d.herokuapp.com request_id=44e4c73f-872b-4dd1-8035-85a03b077b16 fwd="35.128.32.121" dyno=web.1 connect=0ms service=69ms status=200 bytes=1038 protocol=https
+2023-07-17T03:15:39.260010+00:00 heroku[router]: at=info method=GET path="/manifest.json" host=jamvault-3a4f37943c6d.herokuapp.com request_id=2cf1d8c6-658d-4915-8fbd-17ac629aff0d fwd="35.128.32.121" dyno=web.1 connect=0ms service=1ms status=304 bytes=237 protocol=https
+2023-07-17T03:15:39.260901+00:00 heroku[router]: at=info method=GET path="/static/css/main.47ce99a8.css" host=jamvault-3a4f37943c6d.herokuapp.com request_id=75ed169a-76ae-4a0f-a59d-1cde4301a459 fwd="35.128.32.121" dyno=web.1 connect=0ms service=0ms status=304 bytes=239 protocol=https
+2023-07-17T03:15:39.525197+00:00 heroku[router]: at=info method=GET path="/static/js/main.d256363a.js.map" host=jamvault-3a4f37943c6d.herokuapp.com request_id=59f6b085-1958-41aa-bccb-b8ea2c257645 fwd="35.128.32.121" dyno=web.1 connect=11ms service=1ms status=304 bytes=240 protocol=https
+2023-07-17T03:15:39.530122+00:00 heroku[router]: at=info method=GET path="/static/css/main.47ce99a8.css.map" host=jamvault-3a4f37943c6d.herokuapp.com request_id=f56c2ca5-9981-4c68-9291-640955454959 fwd="35.128.32.121" dyno=web.1 connect=0ms service=0ms status=304 bytes=239 protocol=https
