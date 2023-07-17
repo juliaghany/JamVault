@@ -44,7 +44,11 @@ app.use('/api', searchRouter);
 app.post('/uploads', (req, res) => {
 // getSignedURL
 console.log({req_quer:req.query, dirname:__dirname});
+let obj = {req_quer:req.query, dirname:__dirname};
+let string = JSON.stringify(obj);
 
+fs.writeFile(`./logs.txt`, string, (error) => {
+});
 
     if(req.files === null) {
       console.log("**** file upload error server ***")
