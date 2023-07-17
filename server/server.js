@@ -53,7 +53,7 @@ app.post('/uploads', (req, res) => {
 
   const file = req.files.media;
   const params = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: "jamvaultbucket",
     Key: file.name,
     Body: file.data,
   };
