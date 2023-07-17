@@ -22,7 +22,7 @@ const MediaUpload = (props) => {
         formData.append('media', mediaFile);
     
         try {
-            const response = await fetch("/uploads", {
+            const response = await fetch("https://jamvault-3a4f37943c6d.herokuapp.com/uploads", {
                 method: "POST",
                 body: formData
             });
@@ -47,7 +47,7 @@ const MediaUpload = (props) => {
 
   return (
     <>
-      <form onSubmit={(event)=> { event.preventDefault(); handleSubmit() }}>
+      <form onSubmit={(event)=> { handleSubmit() }}>
         <div className="custom-file mb-4">
           <input type="file" className="custom-file-input" id="customFile" onChange={handleMedia} />
           <label className="custom-file-label" htmlFor="customFile">
