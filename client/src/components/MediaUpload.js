@@ -31,7 +31,7 @@ const MediaUpload = (props) => {
                 console.log("Upload was successful");
                 var result = await response.json();
                 console.log("Server response: ", result); // Log the entire result object
-                let fileUrl = result.filePath;
+                let fileUrl = result.filePath; //removed base url
                 props.findMediaPath(result);
                 props.onMediaSelected(fileUrl);
                 console.log("File URL: ", fileUrl);
