@@ -10,7 +10,8 @@ import Container from './components/Container';
 
 
 const httpLink = createHttpLink({
-    uri: 'https://jamvault-3a4f37943c6d.herokuapp.com/graphql',
+    // uri: 'https://jamvault-3a4f37943c6d.app.com/graphql',
+    uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

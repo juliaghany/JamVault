@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
@@ -47,6 +47,10 @@ console.log("hello")
     }
   };
 
+  useEffect(()=> {
+    console.log(error);
+  }, [error]);
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100" style={{ marginTop: '50px'}}>
       <Form onSubmit={(event)=> { handleSubmit(event) }} style={styles.background}>
@@ -57,7 +61,7 @@ console.log("hello")
           </p>
         ) : (
           <>
-              {error && <Alert variant="danger">Username or email address already in use. Please try again.</Alert>}
+              {error && <Alert variant="danger">Some error{/*Username or email address already in use. Please try again*.*/}</Alert>}
             <h2 className="text-center mb-4">Sign Up</h2>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
