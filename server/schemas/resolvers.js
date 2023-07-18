@@ -38,15 +38,23 @@ const resolvers = {
   },
 
     Mutation: {
+      // addUser: async (parent, { username, email, password }) => {
+      //   try {
+      //     const user = await User.create({ username, email, password });
+      //     return user;
+      //   } catch (error) {
+      //     console.error(error);
+      //     throw error;
+      //   }
+      // },
+
+
       addUser: async (parent, { username, email, password }) => {
-        try {
-          const user = await User.create({ username, email, password });
-          return user;
-        } catch (error) {
-          console.error(error);
-          throw error;
-        }
+        const user = await User.create({ username, email, password });
+        const token = signToken(user);
+        return { token, user };
       },
+
       addPost: async (parent, { concertId, review, media }, context) => {
 
         console.log(context)
