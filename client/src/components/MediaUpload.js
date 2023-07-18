@@ -62,21 +62,3 @@ const MediaUpload = (props) => {
 };
 
 export default MediaUpload;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
