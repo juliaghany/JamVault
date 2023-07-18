@@ -50,12 +50,12 @@ function NavBar({ handlePageChange }) {
             }
         };
     
-    return (
-     <Navbar variant="dark" expand="lg" fixed="top" style={styles.nav}>
+return (
+    <Navbar variant="dark" expand="lg" fixed="top" style={styles.nav}>
             <div className="d-flex align-items-center">
-                <Navbar.Brand style={styles.brand} onClick={() => handlePageChange('Home')}>
-                    JamVault
-                </Navbar.Brand>
+            <Navbar.Brand style={styles.brand} onClick={() => handlePageChange('Home')}>
+                <img src={"/images/jamvaultlogo.png"} alt="JamVault Logo" className="logo"/>
+            </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbar-nav" />
             </div>
             <Navbar.Collapse id="navbar-nav">
