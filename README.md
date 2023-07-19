@@ -4,9 +4,6 @@
 
 URL to functional, deployed action: https://jamvault-3a4f37943c6d.herokuapp.com/
 
-![Alt text](assets/images/screenshot1.png)
-![Alt text](assets/images/screenshot2.png)
-
 
 ## Description 
 
